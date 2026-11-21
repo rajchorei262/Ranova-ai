@@ -3,354 +3,416 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080817">
-<title>RANOVA AI - Universal Detector</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090611">
+<title>RANOVA AI | Discover Everything</title>
 <style>
-:root {
-  --bg:#080817;
-  --panel:#111126;
-  --panel2:#191933;
-  --purple:#9747ff;
-  --blue:#267bff;
-  --cyan:#28d9ee;
-  --text:#f5f4ff;
-  --muted:#a3a2bf;
-}
-* {box-sizing:border-box}
-body {
-  margin:0;
-  background:radial-gradient(circle at top,#17123b,var(--bg) 48%);
-  color:var(--text);
-  font-family:Arial,sans-serif;
-}
-header {
-  padding:22px 18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #292747;
-}
-.logo {
-  font-size:23px;
-  font-weight:900;
-  letter-spacing:1px;
-  background:linear-gradient(90deg,#b58aff,#32d8ff);
-  color:transparent;
-  background-clip:text;
-}
-.status {
-  font-size:11px;
-  color:#ffd27d;
-  border:1px solid #65502b;
-  padding:7px 10px;
-  border-radius:20px;
-}
-main {
-  width:min(650px,100%);
-  margin:auto;
-  padding:24px 16px 50px;
-}
-.hero {text-align:center;margin:22px 0 28px}
-.hero h1 {font-size:30px;margin:0 0 10px}
-.hero h1 span {color:#a77aff}
-.hero p {color:var(--muted);line-height:1.6;font-size:14px}
-.card {
-  background:linear-gradient(145deg,#17172f,#101020);
-  border:1px solid #343052;
-  border-radius:19px;
-  padding:19px;
-  margin:17px 0;
-  box-shadow:0 10px 35px #0005;
-}
-.card h2 {font-size:18px;margin:0 0 7px}
-.sub {font-size:13px;color:var(--muted);line-height:1.5}
-.upload {
-  margin-top:17px;
-  min-height:150px;
-  border:1px dashed #7955c9;
-  background:#17142c;
-  border-radius:15px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:18px;
-  gap:10px;
-}
-.upload .symbol {font-size:37px}
-input[type=file] {display:none}
-.btn {
-  border:0;
-  border-radius:12px;
-  padding:13px 17px;
-  color:white;
-  font-size:14px;
-  font-weight:bold;
-  background:linear-gradient(100deg,var(--purple),var(--blue));
-  cursor:pointer;
-}
-.btn.secondary {background:#292642;border:1px solid #49436e}
-.actions {display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
-.actions .btn {flex:1}
-#preview {
-  width:100%;
-  max-height:300px;
-  object-fit:contain;
-  border-radius:12px;
-  margin-top:14px;
-  display:none;
-  background:#080817;
-}
-#scanStatus,#chatStatus {
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.5;
-  margin-top:13px;
-  white-space:pre-wrap;
-}
-.result {
-  display:none;
-  background:#0b0b1d;
-  border:1px solid #3c3565;
-  padding:14px;
-  border-radius:12px;
-  margin-top:14px;
-  line-height:1.6;
-  white-space:pre-wrap;
-  overflow-wrap:anywhere;
-}
-input[type=text],textarea {
-  width:100%;
-  padding:14px;
-  border-radius:12px;
-  border:1px solid #393452;
-  background:#09091a;
-  color:white;
-  font-size:14px;
-  outline:none;
-}
-textarea {resize:vertical;min-height:80px}
-.chatlog {
-  min-height:90px;
-  max-height:280px;
-  overflow:auto;
-  margin:14px 0;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-.message {
-  padding:11px 13px;
-  border-radius:13px;
-  background:#20203b;
-  font-size:13px;
-  line-height:1.5;
-  white-space:pre-wrap;
-  overflow-wrap:anywhere;
-}
-.message.user {background:#39256b;align-self:flex-end}
-footer {
-  text-align:center;
-  color:#77758f;
-  font-size:11px;
-  padding:22px;
-}
+:root{--bg:#090611;--card:#171020;--pink:#ff39b8;--purple:#a855f7;--muted:#b6a9c4}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at top,#351442,#090611 48%);color:white;font-family:Arial,sans-serif}
+header{padding:18px 5%;display:flex;justify-content:space-between;align-items:center;background:#0c0714ed;position:sticky;top:0;z-index:5;border-bottom:1px solid #30223b}
+.logo{font-weight:900;font-size:23px;letter-spacing:2px}.logo span{color:var(--pink)}
+main{max-width:1000px;margin:auto;padding:20px 14px}
+.hero{text-align:center;padding:20px 0}.hero h1{font-size:clamp(28px,6vw,43px);margin:0 0 10px}.hero h1 span{color:var(--pink)}
+.hero p,.muted{color:var(--muted);line-height:1.5}
+nav{display:flex;gap:8px;overflow:auto;padding:10px 0 18px}
+nav button{white-space:nowrap;background:#21162c;color:white;border:1px solid #453050;padding:11px 14px;border-radius:12px}
+nav button.active,.primary{background:linear-gradient(100deg,#e72ba9,#8139df);border:0;color:white}
+.panel{background:linear-gradient(145deg,#1b1225,#100b18);border:1px solid #392744;border-radius:18px;padding:18px;margin-bottom:16px}
+h2{margin:0 0 8px;font-size:21px}
+button{cursor:pointer;font-size:14px;font-weight:bold}
+.btn{padding:12px 16px;border-radius:11px;border:1px solid #51365d;background:#292035;color:white}
+.primary{border:0}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.drop{background:#1b1025;border:1px dashed #9951a8;border-radius:15px;text-align:center;padding:22px 12px;margin-top:15px}
+input[type=file]{display:none}
+input,textarea{background:#0c0812;border:1px solid #453050;color:white;padding:13px;border-radius:11px;width:100%;min-width:0}
+.preview{display:none;margin-top:16px}.preview img{max-width:100%;max-height:330px;border-radius:12px}
+.result{white-space:pre-wrap;line-height:1.6;margin-top:15px}
+.hidden{display:none!important}
+.chatbox{height:350px;overflow:auto;background:#0b0811;border:1px solid #392744;border-radius:13px;padding:12px;margin:15px 0}
+.msg{padding:11px 13px;border-radius:12px;margin:9px 0;max-width:90%;white-space:pre-wrap;line-height:1.5;font-size:14px}
+.bot{background:#251831}.user{background:#762b91;margin-left:auto}
+.chatrow{display:flex;gap:8px}.chatrow input{flex:1}
+.item{background:#120d1a;border:1px solid #392744;padding:13px;border-radius:12px;margin:10px 0}
+.item p{white-space:pre-wrap;line-height:1.5}
+footer{text-align:center;padding:25px;color:#9d90aa;font-size:12px}
+footer strong{color:#e7c9f3}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+@media(max-width:500px){header{padding:16px}.panel{padding:14px}.chatrow{flex-wrap:wrap}.chatrow button{width:100%}}
 </style>
 </head>
 <body>
 <header>
-  <div class="logo">✦ RANOVA AI</div>
-  <div class="status">AI CONNECTION PENDING</div>
+ <div class="logo">RANOVA<span> AI</span></div>
+ <small style="color:#c4a7d5">● DISCOVER MORE</small>
 </header>
 
 <main>
-  <section class="hero">
-    <h1>SCAN ANYTHING.<br><span>KNOW EVERYTHING.</span></h1>
-    <p>Your universal discovery assistant. Upload an image and prepare to explore the world around you.</p>
-  </section>
+<section class="hero">
+ <h1>Discover the world with <span>AI</span></h1>
+ <p>Scan anything. Explore everything. Ask anything.</p>
+</section>
 
-  <section class="card">
-    <h2>⌕ Universal AI Detector</h2>
-    <p class="sub">Choose a photo from your gallery or capture one using your camera.</p>
+<nav>
+ <button class="active" data-tab="scanner">📷 Scanner</button>
+ <button data-tab="assistant">✦ AI Assistant</button>
+ <button data-tab="history">◷ History</button>
+ <button data-tab="favourites">♡ Favourites</button>
+ <button data-tab="settings">⚙ Settings</button>
+</nav>
 
-    <div class="upload">
-      <div class="symbol">📷</div>
-      <strong id="fileLabel">Choose an image to scan</strong>
-      <span class="sub">Plants · Animals · Objects · Insects · Vehicles · More</span>
-      <div class="actions">
-        <label class="btn" for="gallery">Gallery</label>
-        <label class="btn secondary" for="camera">Camera</label>
-      </div>
-      <input id="gallery" type="file" accept="image/*">
-      <input id="camera" type="file" accept="image/*" capture="environment">
-    </div>
+<section id="scanner" class="view">
+ <div class="panel">
+  <h2>📷 AI Image Scanner</h2>
+  <p class="muted">Upload an image or use your camera to discover animals, plants, objects, places and more.</p>
+  <div class="drop">
+   <div style="font-size:38px">⌁</div>
+   <h3>Choose an image</h3>
+   <p class="muted">Select from your gallery or take a photo.</p>
+   <div class="actions" style="justify-content:center">
+    <button class="btn primary" id="galleryBtn">🖼 Gallery</button>
+    <button class="btn" id="cameraBtn">📸 Camera</button>
+   </div>
+   <input id="gallery" type="file" accept="image/*">
+   <input id="camera" type="file" accept="image/*" capture="environment">
+  </div>
+  <div id="preview" class="preview">
+   <img id="photo" alt="Selected image">
+   <div class="actions">
+    <button class="btn primary" id="scanBtn">✦ Analyze with AI</button>
+    <button class="btn" id="removeBtn">Remove</button>
+   </div>
+  </div>
+  <p class="muted" id="scanStatus"></p>
+  <div id="scanResult" class="result"></div>
+  <div id="scanActions" class="actions hidden">
+   <button class="btn" id="saveFav">♡ Favourite</button>
+   <button class="btn" id="askAbout">Ask AI about this</button>
+  </div>
+ </div>
+</section>
 
-    <img id="preview" alt="Selected image preview">
+<section id="assistant" class="view hidden">
+ <div class="panel">
+  <h2>✦ RANOVA AI Assistant</h2>
+  <p class="muted">Your AI assistant for questions, ideas and discoveries.</p>
+  <div id="chat" class="chatbox">
+   <div class="msg bot">Hello! Welcome to RANOVA AI. What would you like to discover today?</div>
+  </div>
+  <div class="chatrow">
+   <input id="message" placeholder="Ask RANOVA anything..." maxlength="2000">
+   <button class="btn primary" id="send">Send</button>
+  </div>
+  <div class="actions">
+   <button class="btn" id="voice">🎙 Voice input</button>
+   <button class="btn" id="clearChat">Clear chat</button>
+  </div>
+  <p id="voiceStatus" class="muted"></p>
+ </div>
+</section>
 
-    <button class="btn" id="scanBtn" style="width:100%;margin-top:15px" disabled>
-      ✦ SCAN IMAGE
-    </button>
-    <div id="scanStatus">Select an image to begin.</div>
-    <div id="scanResult" class="result"></div>
-  </section>
+<section id="history" class="view hidden">
+ <div class="panel">
+  <h2>◷ Scan History</h2>
+  <p class="muted">Your previous discoveries.</p>
+  <div id="historyList"></div>
+  <button class="btn" id="clearHistory">Clear history</button>
+ </div>
+</section>
 
-  <section class="card">
-    <h2>✧ RANOVA AI Assistant</h2>
-    <p class="sub">Ask questions and explore ideas with your AI assistant.</p>
-    <div id="chatlog" class="chatlog">
-      <div class="message">Hello! I'm RANOVA AI. The chat service will become available when the secure AI connection is configured.</div>
-    </div>
-    <textarea id="question" placeholder="Ask RANOVA anything..."></textarea>
-    <div class="actions">
-      <button class="btn" id="sendBtn">Send message</button>
-      <button class="btn secondary" id="voiceBtn">🎙 Speak</button>
-    </div>
-    <div id="chatStatus"></div>
-  </section>
+<section id="favourites" class="view hidden">
+ <div class="panel">
+  <h2>♡ Favourites</h2>
+  <p class="muted">Your saved discoveries.</p>
+  <div id="favouriteList"></div>
+ </div>
+</section>
 
-  <section class="card">
-    <h2>About RANOVA</h2>
-    <p class="sub">Created by Raj, Arup and Nathan.</p>
-    <p><strong>THREE MINDS. ONE VISION.</strong></p>
-  </section>
+<section id="settings" class="view hidden">
+ <div class="panel">
+  <h2>⚙ Settings</h2>
+  <div class="grid">
+   <div class="panel">
+    <h3>AI connection</h3>
+    <p class="muted" id="connection">Not checked yet.</p>
+    <button class="btn" id="check">Check connection</button>
+   </div>
+   <div class="panel">
+    <h3>Voice</h3>
+    <p class="muted">Test spoken responses.</p>
+    <button class="btn" id="testVoice">Test voice</button>
+   </div>
+   <div class="panel">
+    <h3>Local data</h3>
+    <p class="muted">Clear your saved scans and favourites.</p>
+    <button class="btn" id="clearData">Clear all data</button>
+   </div>
+  </div>
+ </div>
+</section>
 </main>
 
-<footer>RANOVA AI · SCAN ANYTHING. KNOW EVERYTHING.</footer>
+<footer>
+ <strong>THREE MINDS. ONE VISION.</strong><br><br>
+ Created by Raj Chorei • Arup Sinha • Nathan Ranglong
+</footer>
 
 <script>
-/*
-  IMPORTANT:
-  Add your secure backend URL here after the backend is created.
-  Never put a private AI API key in this public HTML file.
-*/
-const API_BASE = "";
+/* Configure this with your deployed secure AI backend URL. */
+const API_BASE = "PASTE_YOUR_WORKER_URL_HERE";
 
-const gallery = document.getElementById("gallery");
-const camera = document.getElementById("camera");
-const preview = document.getElementById("preview");
-const scanBtn = document.getElementById("scanBtn");
-const scanStatus = document.getElementById("scanStatus");
-const scanResult = document.getElementById("scanResult");
-const fileLabel = document.getElementById("fileLabel");
-
+const $ = id => document.getElementById(id);
 let selectedFile = null;
+let latestScan = "";
 
-function chooseImage(file) {
-  if (!file) return;
-  if (!file.type.startsWith("image/")) {
-    scanStatus.textContent = "Please choose a valid image.";
-    return;
-  }
-  selectedFile = file;
-  preview.src = URL.createObjectURL(file);
-  preview.style.display = "block";
-  fileLabel.textContent = file.name;
-  scanBtn.disabled = false;
-  scanStatus.textContent = "Image ready. AI scanning requires the secure backend connection.";
-  scanResult.style.display = "none";
+function read(key){
+ try{return JSON.parse(localStorage.getItem(key)||"[]")}
+ catch(e){return []}
+}
+function write(key,value){
+ try{localStorage.setItem(key,JSON.stringify(value))}
+ catch(e){alert("Device storage is full.")}
+}
+function api(path){return API_BASE.replace(/\/+$/,"")+path}
+
+document.querySelectorAll("nav button").forEach(button=>{
+ button.onclick=()=>{
+  document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+  button.classList.add("active");
+  document.querySelectorAll(".view").forEach(v=>v.classList.add("hidden"));
+  $(button.dataset.tab).classList.remove("hidden");
+  if(button.dataset.tab==="history")renderHistory();
+  if(button.dataset.tab==="favourites")renderFavourites();
+ };
+});
+
+$("galleryBtn").onclick=()=>$("gallery").click();
+$("cameraBtn").onclick=()=>$("camera").click();
+
+function chooseFile(e){
+ const file=e.target.files[0];
+ if(!file)return;
+ if(!file.type.startsWith("image/"))return alert("Choose an image file.");
+ if(file.size>12*1024*1024)return alert("Image must be smaller than 12 MB.");
+ selectedFile=file;
+ latestScan="";
+ const reader=new FileReader();
+ reader.onload=()=>{
+  $("photo").src=reader.result;
+  $("preview").style.display="block";
+  $("scanResult").textContent="";
+  $("scanActions").classList.add("hidden");
+  $("scanStatus").textContent="Image ready.";
+ };
+ reader.readAsDataURL(file);
+ e.target.value="";
+}
+$("gallery").onchange=chooseFile;
+$("camera").onchange=chooseFile;
+
+$("removeBtn").onclick=()=>{
+ selectedFile=null;
+ $("preview").style.display="none";
+ $("scanResult").textContent="";
+ $("scanStatus").textContent="";
+ $("scanActions").classList.add("hidden");
+};
+
+function base64(file){
+ return new Promise((resolve,reject)=>{
+  const reader=new FileReader();
+  reader.onload=()=>resolve(reader.result.split(",")[1]);
+  reader.onerror=reject;
+  reader.readAsDataURL(file);
+ });
 }
 
-gallery.addEventListener("change", e => chooseImage(e.target.files[0]));
-camera.addEventListener("change", e => chooseImage(e.target.files[0]));
+$("scanBtn").onclick=async()=>{
+ if(!selectedFile)return;
+ if(API_BASE.includes("PASTE_")){
+  $("scanStatus").textContent="Connect your secure AI backend first.";
+  return;
+ }
+ $("scanBtn").disabled=true;
+ $("scanStatus").textContent="✦ Analyzing your image...";
+ try{
+  const response=await fetch(api("/api/analyze"),{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({
+    image:await base64(selectedFile),
+    mimeType:selectedFile.type
+   })
+  });
+  const data=await response.json();
+  if(!response.ok)throw Error(data.error||"Scan failed");
+  latestScan=data.result;
+  $("scanResult").textContent=latestScan;
+  $("scanStatus").textContent="Analysis complete.";
+  $("scanActions").classList.remove("hidden");
+  const history=read("ranova_history");
+  history.unshift({date:new Date().toLocaleString(),result:latestScan});
+  write("ranova_history",history.slice(0,50));
+ }catch(e){
+  $("scanStatus").textContent="Error: "+e.message;
+ }finally{
+  $("scanBtn").disabled=false;
+ }
+};
 
-scanBtn.addEventListener("click", async () => {
-  if (!selectedFile) return;
+$("saveFav").onclick=()=>{
+ if(!latestScan)return;
+ const fav=read("ranova_favourites");
+ fav.unshift({date:new Date().toLocaleString(),result:latestScan});
+ write("ranova_favourites",fav.slice(0,50));
+ $("saveFav").textContent="♥ Saved";
+};
 
-  if (!API_BASE) {
-    scanStatus.textContent =
-      "AI scanning is not connected yet. Your image preview works, but genuine identification needs the secure AI backend.";
-    return;
-  }
+$("askAbout").onclick=()=>{
+ document.querySelector('[data-tab="assistant"]').click();
+ $("message").value="Explain this scan in more detail:\n"+latestScan;
+};
 
-  scanBtn.disabled = true;
-  scanStatus.textContent = "Analysing your image...";
-  scanResult.style.display = "none";
-
-  try {
-    const form = new FormData();
-    form.append("image", selectedFile);
-
-    const response = await fetch(API_BASE + "/api/scan", {
-      method: "POST",
-      body: form
-    });
-    if (!response.ok) throw new Error("Scan service error: " + response.status);
-
-    const data = await response.json();
-    scanResult.textContent = data.result || data.description || "No result returned.";
-    scanResult.style.display = "block";
-    scanStatus.textContent = "Analysis complete.";
-  } catch (error) {
-    scanStatus.textContent = "Could not connect to the scan service. Please try again later.";
-  } finally {
-    scanBtn.disabled = false;
-  }
-});
-
-const chatlog = document.getElementById("chatlog");
-const question = document.getElementById("question");
-const chatStatus = document.getElementById("chatStatus");
-
-function addMessage(text, who) {
-  const div = document.createElement("div");
-  div.className = "message " + who;
-  div.textContent = text;
-  chatlog.appendChild(div);
-  chatlog.scrollTop = chatlog.scrollHeight;
+function addMessage(text,type){
+ const div=document.createElement("div");
+ div.className="msg "+type;
+ div.textContent=text;
+ $("chat").appendChild(div);
+ $("chat").scrollTop=$("chat").scrollHeight;
 }
 
-document.getElementById("sendBtn").addEventListener("click", async () => {
-  const message = question.value.trim();
-  if (!message) return;
+async function sendMessage(){
+ const message=$("message").value.trim();
+ if(!message)return;
+ if(API_BASE.includes("PASTE_")){
+  addMessage("The AI backend is not connected yet. Please configure the Worker URL.","bot");
+  return;
+ }
+ $("message").value="";
+ addMessage(message,"user");
+ $("send").disabled=true;
+ try{
+  const response=await fetch(api("/api/chat"),{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({message,scanContext:latestScan})
+  });
+  const data=await response.json();
+  if(!response.ok)throw Error(data.error||"Chat failed");
+  addMessage(data.reply||"No response received.","bot");
+ }catch(e){
+  addMessage("Connection error: "+e.message,"bot");
+ }finally{
+  $("send").disabled=false;
+ }
+}
+$("send").onclick=sendMessage;
+$("message").onkeydown=e=>{if(e.key==="Enter")sendMessage()};
+$("clearChat").onclick=()=>{
+ $("chat").innerHTML='<div class="msg bot">Chat cleared. What would you like to explore?</div>';
+};
 
-  addMessage(message, "user");
-  question.value = "";
+function renderHistory(){
+ const list=read("ranova_history");
+ const box=$("historyList");
+ box.innerHTML="";
+ if(!list.length){box.textContent="No scans yet.";return}
+ list.forEach(item=>{
+  const div=document.createElement("div");
+  div.className="item";
+  const date=document.createElement("small");
+  date.textContent=item.date;
+  const p=document.createElement("p");
+  p.textContent=item.result;
+  div.append(date,p);
+  box.appendChild(div);
+ });
+}
 
-  if (!API_BASE) {
-    chatStatus.textContent =
-      "AI chat is not connected yet. We'll activate it after setting up the secure backend.";
-    return;
-  }
-
-  chatStatus.textContent = "RANOVA is thinking...";
-
-  try {
-    const response = await fetch(API_BASE + "/api/chat", {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({message})
-    });
-    if (!response.ok) throw new Error("Chat service error");
-
-    const data = await response.json();
-    addMessage(data.reply || data.response || "No reply received.", "bot");
-    chatStatus.textContent = "";
-  } catch (error) {
-    chatStatus.textContent = "Could not connect to the AI assistant.";
-  }
-});
-
-document.getElementById("voiceBtn").addEventListener("click", () => {
-  const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
-
-  if (!SpeechRecognition) {
-    chatStatus.textContent = "Voice input is not supported by this browser. Try Chrome.";
-    return;
-  }
-
-  const recognition = new SpeechRecognition();
-  recognition.lang = "en-IN";
-  recognition.onresult = event => {
-    question.value = event.results[0][0].transcript;
+function renderFavourites(){
+ const list=read("ranova_favourites");
+ const box=$("favouriteList");
+ box.innerHTML="";
+ if(!list.length){box.textContent="No favourites yet.";return}
+ list.forEach((item,index)=>{
+  const div=document.createElement("div");
+  div.className="item";
+  const date=document.createElement("small");
+  date.textContent=item.date;
+  const p=document.createElement("p");
+  p.textContent=item.result;
+  const button=document.createElement("button");
+  button.className="btn";
+  button.textContent="Remove";
+  button.onclick=()=>{
+   const all=read("ranova_favourites");
+   all.splice(index,1);
+   write("ranova_favourites",all);
+   renderFavourites();
   };
-  recognition.onerror = () => {
-    chatStatus.textContent = "Voice input was not available. Try again.";
-  };
-  recognition.start();
-});
+  div.append(date,p,button);
+  box.appendChild(div);
+ });
+}
+
+$("clearHistory").onclick=()=>{
+ if(confirm("Clear scan history?")){
+  write("ranova_history",[]);
+  renderHistory();
+ }
+};
+$("clearData").onclick=()=>{
+ if(confirm("Clear all saved data?")){
+  write("ranova_history",[]);
+  write("ranova_favourites",[]);
+  renderHistory();
+  renderFavourites();
+ }
+};
+
+async function checkConnection(){
+ $("connection").textContent="Checking...";
+ try{
+  const response=await fetch(api("/api/health"));
+  const data=await response.json();
+  $("connection").textContent=response.ok?(data.status||"Connected"):"Connection failed.";
+ }catch(e){
+  $("connection").textContent="Not connected. Check backend URL.";
+ }
+}
+$("check").onclick=checkConnection;
+
+function speak(text){
+ if(!("speechSynthesis" in window)){
+  alert("Voice output is not supported.");
+  return;
+ }
+ speechSynthesis.cancel();
+ const utterance=new SpeechSynthesisUtterance(text);
+ utterance.lang="en-IN";
+ speechSynthesis.speak(utterance);
+}
+$("testVoice").onclick=()=>speak("Welcome to RANOVA AI.");
+
+$("voice").onclick=()=>{
+ const Speech=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!Speech){
+  $("voiceStatus").textContent="Voice input is not supported in this browser.";
+  return;
+ }
+ const recognition=new Speech();
+ recognition.lang="en-IN";
+ $("voiceStatus").textContent="Listening...";
+ recognition.onresult=e=>{
+  $("message").value=e.results[0][0].transcript;
+  $("voiceStatus").textContent="Voice captured. Press Send.";
+ };
+ recognition.onerror=()=>{
+  $("voiceStatus").textContent="Microphone permission or voice recognition unavailable.";
+ };
+ recognition.start();
+};
 </script>
 </body>
 </html>
