@@ -3,863 +3,315 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LifeLens AI</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<title>NOISEMAP | Smart Noise Intelligence</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
---bg:#10091F;
---card:#201431;
---purple:#925BEB;
---light:#D9C1FF;
---muted:#AA98BD;
-}
-body{
-background:var(--bg);
-color:white;
-font-family:Arial,sans-serif;
-min-height:100vh;
-}
-button,input{font:inherit}
+:root{--bg:#07111f;--panel:#101e31;--panel2:#172941;--cyan:#22d3ee;--blue:#3b82f6;--text:#f1f5f9;--muted:#94a3b8;--green:#22c55e;--red:#ef4444;--border:#2a3d55}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-.app{
-max-width:1100px;
-margin:auto;
-padding:20px;
-padding-bottom:95px;
-}
 .hidden{display:none!important}
-.logo{
-font-size:25px;
-font-weight:900;
-letter-spacing:2px;
-color:#D9C1FF;
-}
-.tagline{
-font-size:10px;
-letter-spacing:3px;
-color:#AA98BD;
-margin-top:7px;
-}
-.header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:35px;
-}
-.avatar{
-width:48px;height:48px;
-border-radius:50%;
-background:linear-gradient(135deg,#B184FF,#7742D0);
-display:grid;place-items:center;
-font-weight:bold;font-size:21px;
-}
-h1{font-size:28px;margin:12px 0}
-h2{font-size:21px;margin-bottom:12px}
-p{line-height:1.6}
-.muted{color:var(--muted)}
-.small{font-size:12px;color:var(--muted)}
-.card{
-background:linear-gradient(140deg,#302047,#1C112C);
-border:1px solid #493263;
-border-radius:20px;
-padding:20px;
-margin:16px 0;
-}
-.hero{
-background:linear-gradient(130deg,#844CD7,#4B267E,#211332);
-padding:28px 22px;
-border-radius:24px;
-margin:25px 0;
-box-shadow:0 10px 35px #5c329b33;
-}
-.hero h2{font-size:27px;margin:13px 0}
-.hero p{color:#E9D9FF}
-.pill{
-font-size:11px;
-letter-spacing:2px;
-color:#E4CCFF;
-}
-.primary{
-background:linear-gradient(100deg,#B184FF,#7742D0);
-border:0;
-border-radius:12px;
-padding:14px 20px;
-color:white;
-font-weight:bold;
-margin-top:18px;
-width:100%;
-}
-.secondary{
-background:#34204B;
-border:1px solid #65468A;
-color:white;
-border-radius:11px;
-padding:12px 15px;
-}
-.section-head{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin:27px 0 16px;
-}
-.grid{
-display:grid;
-grid-template-columns:repeat(2,minmax(0,1fr));
-gap:13px;
-}
-.feature{
-background:linear-gradient(145deg,#302047,#1C112C);
-border:1px solid #493263;
-border-radius:17px;
-padding:17px 13px;
-min-height:155px;
-text-align:left;
-color:white;
-transition:.2s;
-}
-.feature:active{transform:scale(.97)}
-.feature .emoji{font-size:29px}
-.feature h3{font-size:15px;margin:13px 0 6px}
-.feature p{font-size:11px;color:#B5A3C7}
-.explore{
-color:#C8A7FF;
-font-size:10px;
-font-weight:bold;
-margin-top:14px;
-letter-spacing:1px;
-}
-.founders-btn{
-width:100%;
-padding:17px;
-background:linear-gradient(100deg,#4A286F,#29183C);
-border:1px solid #74509C;
-border-radius:15px;
-color:white;
-font-weight:bold;
-margin-top:23px;
-}
-.page-title{font-size:27px;margin:15px 0 8px}
-.page-sub{color:var(--muted);font-size:13px;margin-bottom:22px}
-.input{
-width:100%;
-background:#160D24;
-border:1px solid #543C70;
-border-radius:12px;
-padding:15px;
-color:white;
-outline:none;
-margin:9px 0 17px;
-}
-.input:focus{border-color:#B184FF}
-label{
-font-size:11px;
-letter-spacing:1px;
-color:#D9C1FF;
-}
-.account{
-display:flex;
-align-items:center;
-gap:12px;
-padding:13px;
-border:1px solid #493263;
-border-radius:13px;
-margin:10px 0;
-cursor:pointer;
-}
-.account.selected{
-border-color:#B184FF;
-background:#38234E;
-}
-.account-icon{
-width:40px;height:40px;
-background:#67409A;
-border-radius:50%;
-display:grid;place-items:center;
-font-weight:bold;
-}
-.account-info{flex:1}
-.account-info strong{display:block;font-size:14px}
-.account-info small{color:#B5A3C7}
-#loginScreen{
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px;
-background:radial-gradient(ellipse at top,#392052,#10091F 65%);
-}
-.login-wrap{width:100%;max-width:440px}
-.login-logo{
-text-align:center;
-font-size:32px;
-font-weight:900;
-color:#D9C1FF;
-letter-spacing:3px;
-animation:pulse 2s infinite;
-}
-.login-tag{
-text-align:center;
-font-size:10px;
-letter-spacing:3px;
-color:#AA98BD;
-margin:13px 0 30px;
-}
-.login-card{
-background:#201431;
-border:1px solid #493263;
-border-radius:22px;
-padding:23px;
-}
-.login-card h2{text-align:center}
-.login-card .muted{text-align:center;font-size:13px;margin-bottom:25px}
-.note{
-font-size:10px;
-color:#9B89AC;
-text-align:center;
-line-height:1.6;
-margin-top:16px;
-}
-@keyframes pulse{
-50%{text-shadow:0 0 20px #B184FF;transform:scale(1.04)}
-}
-.nav{
-position:fixed;
-bottom:0;
-left:0;right:0;
-background:#1B1028;
-border-top:1px solid #493263;
-display:flex;
-justify-content:space-around;
-padding:12px 4px calc(12px + env(safe-area-inset-bottom));
-z-index:10;
-}
-.nav button{
-background:none;border:0;color:#A895BB;
-font-size:10px;
-display:flex;flex-direction:column;
-align-items:center;gap:5px;
-}
-.nav button span{font-size:20px}
-.nav button.active{color:#D9C1FF}
-.message{
-padding:14px;
-border-radius:15px;
-margin:12px 0;
-max-width:90%;
-}
-.user-msg{
-background:#51347B;
-margin-left:auto;
-}
-.ai-msg{
-background:#281A39;
-border:1px solid #493263;
-}
-.msg-label{
-font-size:10px;
-color:#D9C1FF;
-font-weight:bold;
-margin-bottom:8px;
-}
-.msg-text{font-size:14px;line-height:1.6;white-space:pre-wrap}
-.chat-box{
-height:52vh;
-overflow-y:auto;
-padding:5px 0;
-}
-.chat-controls{
-display:flex;gap:8px;
-padding:12px 0;
-}
-.chat-controls input{margin:0;flex:1;min-width:0}
-.send{
-width:50px;
-background:#925BEB;
-border:0;border-radius:12px;color:white;
-font-size:20px;
-}
-.empty{
-text-align:center;
-padding:65px 10px;
-}
-.empty .symbol{font-size:55px;color:#D9C1FF}
-.founder{
-background:linear-gradient(140deg,#432568,#211332);
-border:1px solid #65468A;
-padding:23px;
-border-radius:20px;
-text-align:center;
-margin:17px 0;
-}
-.founder-avatar{
-width:75px;height:75px;
-border-radius:50%;
-background:linear-gradient(135deg,#B184FF,#7742D0);
-display:grid;place-items:center;
-font-size:30px;font-weight:bold;
-margin:0 auto 15px;
-}
-.founder h2{margin:8px}
-.role{color:#D9C1FF;font-size:12px;font-weight:bold}
-.description{
-color:#C2B2D0;
-font-size:13px;
-margin-top:12px;
-line-height:1.6;
-}
-.setting{
-display:flex;justify-content:space-between;
-align-items:center;
-background:#241733;
-border:1px solid #493263;
-border-radius:13px;
-padding:17px;
-margin:12px 0;
-}
-.setting button{background:none;border:0;color:#D9C1FF}
-.logout{
-background:#612A50;
-border:1px solid #A04C81;
-border-radius:12px;
-color:white;
-padding:15px;width:100%;
-margin-top:25px;
-}
-.history-item{
-background:#251832;
-border:1px solid #493263;
-padding:16px;
-border-radius:13px;
-margin:12px 0;
-color:white;
-width:100%;
-text-align:left;
-}
-.modal{
-position:fixed;inset:0;
-background:#000B;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px;
-z-index:30;
-}
-.modal-content{
-width:100%;max-width:380px;
-background:#251832;
-border:1px solid #74509C;
-border-radius:20px;
-padding:23px;
-}
-.modal-content h2{color:#D9C1FF}
-.modal-content p{font-size:14px;color:#C7B5D7;margin-top:12px}
-.modal-content button{margin-top:20px}
-#cameraVideo{
-width:100%;
-border-radius:15px;
-background:#080510;
-max-height:400px;
-}
-@media(min-width:650px){
-.grid{grid-template-columns:repeat(3,1fr)}
-.app{padding-top:30px}
-}
+.muted,.small{color:var(--muted)}
+.small{font-size:12px}
+.brand{font-size:23px;font-weight:900;letter-spacing:1px;display:flex;align-items:center;gap:10px}
+.logo{width:43px;height:43px;border-radius:13px;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#06111e;display:grid;place-items:center;font-size:23px}
+.btn{border:0;border-radius:10px;padding:12px 16px;background:linear-gradient(110deg,var(--cyan),var(--blue));color:#06111e;font-weight:bold}
+.btn.secondary{background:#20344d;color:white;border:1px solid var(--border)}
+.btn.danger{background:#7f1d1d;color:white}
+.btn:disabled{opacity:.4}
+input,select,textarea{width:100%;padding:12px;background:#091729;color:white;border:1px solid var(--border);border-radius:9px;margin-top:7px}
+label{display:block;font-size:13px;color:#cbd5e1;margin:12px 0}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:17px;margin-bottom:15px}
+.card h3{margin:0 0 12px}
+.login{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:5%;gap:30px;background:radial-gradient(circle at 20% 20%,#143653,#07111f 60%)}
+.loginIntro h1{font-size:clamp(38px,6vw,65px);line-height:1.05}
+.team{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
+.team div{background:#102239;border:1px solid var(--border);padding:11px;border-radius:10px;min-width:125px}
+.team b,.team span{display:block}.team span{font-size:11px;color:var(--muted);margin-top:4px}
+.loginBox{max-width:440px;width:100%;margin:auto}
+.tabs{display:flex;gap:8px;margin:15px 0}.tabs button{flex:1}
+.app{min-height:100vh}
+.sidebar{position:fixed;top:0;bottom:0;left:0;width:235px;background:#091626;border-right:1px solid var(--border);padding:18px 13px;overflow:auto;z-index:5}
+.sidebar .brand{margin:5px 5px 28px}
+.navtitle{font-size:10px;color:#64748b;letter-spacing:1.5px;margin:20px 10px 8px}
+.nav{display:block;width:100%;text-align:left;padding:12px;border:0;border-radius:9px;background:transparent;color:#b4c3d5;margin:3px 0}
+.nav:hover,.nav.active{background:#153149;color:var(--cyan)}
+.main{margin-left:235px;padding:23px;max-width:1600px}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.page{display:none}.page.active{display:block}
+.hero{padding:24px;border:1px solid #28516b;border-radius:16px;background:linear-gradient(120deg,#102e48,#12213d);margin-bottom:16px}
+.hero h1{font-size:30px;margin:10px 0}
+.pill{display:inline-block;padding:6px 10px;border-radius:30px;background:#123b4b;color:var(--cyan);font-size:11px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.two{display:grid;grid-template-columns:1.3fr 1fr;gap:15px}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat{font-size:28px;font-weight:900;margin:8px 0}
+.statlabel{font-size:12px;color:var(--muted)}
+canvas{width:100%;height:210px;display:block}
+.gauge{width:170px;height:170px;border-radius:50%;margin:18px auto;display:grid;place-items:center;background:conic-gradient(var(--cyan) 0deg,#26374c 0deg);position:relative}
+.gauge:before{content:"";position:absolute;width:138px;height:138px;border-radius:50%;background:var(--panel)}
+.gaugeContent{position:relative;text-align:center}.gauge strong{font-size:37px;display:block}
+.line{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);font-size:13px}
+.notice{padding:12px;border-radius:9px;background:#172b42;border:1px solid var(--border);font-size:12px;color:#cbd5e1}
+.progress{height:8px;background:#26374c;border-radius:20px;overflow:hidden}.progress div{height:100%;width:0;background:var(--cyan)}
+.question{font-size:19px;line-height:1.5;margin:20px 0}
+.option{display:block;width:100%;text-align:left;padding:13px;background:#0b1a2c;color:white;border:1px solid var(--border);border-radius:9px;margin:8px 0}
+.option.selected{border-color:var(--cyan);background:#12344a}
+.option.correct{border-color:var(--green);background:#123526}
+.option.wrong{border-color:var(--red);background:#3a1c25}
+.mobileMenu{display:none}
+table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:10px;border-bottom:1px solid var(--border);font-size:13px}
+@media(max-width:950px){.grid{grid-template-columns:repeat(2,1fr)}.sidebar{width:205px}.main{margin-left:205px}}
+@media(max-width:700px){.sidebar{display:none;width:245px}.sidebar.open{display:block}.main{margin:0;padding:13px}.mobileMenu{display:inline-block}.two,.three{grid-template-columns:1fr}.login{grid-template-columns:1fr;padding:18px}.loginIntro h1{font-size:40px}.topbar h2{font-size:17px}}
 </style>
 </head>
-
 <body>
 
 <!-- LOGIN -->
-<section id="loginScreen">
-<div class="login-wrap">
-<div class="login-logo">✦ LIFELENS</div>
-<div class="login-tag">SCAN. DISCOVER. UNDERSTAND.</div>
-
-<div class="login-card">
-<h2>Welcome Back</h2>
-<p class="muted">Sign in to enter your world.</p>
-
-<label>SELECT ACCOUNT</label>
-<div id="accountList"></div>
-
-<label>USERNAME</label>
-<input id="username" class="input" placeholder="Enter username" autocomplete="username">
-
-<label>PASSWORD</label>
-<input id="password" type="password" class="input" placeholder="Enter password" autocomplete="current-password">
-
-<button class="primary" onclick="login()">LOGIN →</button>
-
-<p class="note">
-LifeLens demonstration login. This is not real authentication.
-</p>
-</div>
-<p class="note">POWERED BY THE LIFELENS VISION</p>
-</div>
+<section id="authScreen" class="login">
+ <div class="loginIntro">
+  <div class="brand"><div class="logo">N</div> NOISEMAP</div>
+  <span class="pill">SMART NOISE INTELLIGENCE PLATFORM</span>
+  <h1>Measure.<br><span style="color:var(--cyan)">Map.</span><br>Understand.</h1>
+  <p class="muted">Classroom noise intelligence, advanced learning and performance analytics.</p>
+  <div class="team">
+   <div><b>Arup Sinha</b><span>Founder</span></div>
+   <div><b>Raj Chorei</b><span>CEO</span></div>
+   <div><b>Nathan Ranglong</b><span>Co-Founder</span></div>
+  </div>
+ </div>
+ <div class="card loginBox">
+  <h2 id="authTitle">Welcome to NOISEMAP</h2>
+  <p class="small muted" id="authDesc">Sign in to your local demo account.</p>
+  <div class="tabs">
+   <button class="btn" id="loginTab" onclick="setAuth('login')">Login</button>
+   <button class="btn secondary" id="signupTab" onclick="setAuth('signup')">Create account</button>
+  </div>
+  <form id="authForm">
+   <div id="nameWrap" class="hidden"><label>Full name<input id="fullName"></label></div>
+   <label>Email<input type="email" id="email" required></label>
+   <label>Password<input type="password" id="password" minlength="6" required></label>
+   <div id="extraWrap" class="hidden">
+    <label>School<input id="school"></label>
+    <label>Class / Role<input id="className" placeholder="e.g. Class 10"></label>
+   </div>
+   <button class="btn" style="width:100%" id="authSubmit">Login</button>
+  </form>
+  <p id="authMessage" class="small"></p>
+  <div class="notice">Demo authentication only. Do not use a real password. This version stores data on this browser, not in a secure cloud account.</div>
+ </div>
 </section>
 
-<!-- MAIN APP -->
-<div id="mainApp" class="hidden">
-<main class="app">
+<!-- APPLICATION -->
+<div id="app" class="app hidden">
+ <aside class="sidebar" id="sidebar">
+  <div class="brand"><div class="logo">N</div> NOISEMAP</div>
+  <div class="navtitle">MAIN</div>
+  <button class="nav active" data-page="dashboard">⌂ Dashboard</button>
+  <button class="nav" data-page="noise">〰 Noise Monitor</button>
+  <button class="nav" data-page="mapper">▦ Class Mapper</button>
+  <div class="navtitle">LEARNING</div>
+  <button class="nav" data-page="mcq">✎ MCQ Academy</button>
+  <button class="nav" data-page="arena">🏆 Challenge Arena</button>
+  <button class="nav" data-page="assistant">✧ AI Assistant</button>
+  <div class="navtitle">PERSONAL</div>
+  <button class="nav" data-page="analytics">▥ Analytics</button>
+  <button class="nav" data-page="reports">▤ Reports</button>
+  <button class="nav" data-page="profile">◉ My Profile</button>
+  <button class="nav" data-page="settings">⚙ Settings</button>
+  <button class="nav" onclick="logout()">↪ Logout</button>
+ </aside>
+ <main class="main">
+  <div class="topbar">
+   <div style="display:flex;align-items:center;gap:10px">
+    <button class="btn secondary mobileMenu" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+    <div><h2 id="pageTitle" style="margin:0">Dashboard</h2><span class="small">NOISEMAP Intelligence</span></div>
+   </div>
+   <span class="small" id="topUser"></span>
+  </div>
 
-<!-- HOME -->
-<section id="homePage" class="page">
-<div class="header">
-<div>
-<div class="logo">LIFELENS ✦</div>
-<div class="tagline">YOUR WORLD, REIMAGINED</div>
-</div>
-<button class="avatar" id="homeAvatar" onclick="showPage('profile')">A</button>
-</div>
+  <!-- DASHBOARD -->
+  <section class="page active" id="page-dashboard">
+   <div class="hero">
+    <span class="pill">PERSONAL COMMAND CENTRE</span>
+    <h1>Welcome, <span id="welcomeName">Student</span>.</h1>
+    <p class="muted">Monitor your classroom, practise challenging questions and track your progress.</p>
+    <button class="btn" onclick="openPage('noise')">Start noise scan</button>
+    <button class="btn secondary" onclick="openPage('mcq')">Start MCQ challenge</button>
+   </div>
+   <div class="grid">
+    <div class="card"><div class="stat" id="statQuestions">0</div><div class="statlabel">Questions attempted</div></div>
+    <div class="card"><div class="stat" id="statAccuracy">0%</div><div class="statlabel">Overall accuracy</div></div>
+    <div class="card"><div class="stat" id="statRounds">0</div><div class="statlabel">Rounds completed</div></div>
+    <div class="card"><div class="stat" id="statScans">0</div><div class="statlabel">Noise scans</div></div>
+   </div>
+   <div class="two" style="margin-top:15px">
+    <div class="card"><h3>Learning performance</h3><canvas id="dashChart"></canvas></div>
+    <div class="card"><h3>Recent activity</h3><div id="recentActivity" class="small">No activity yet.</div></div>
+   </div>
+  </section>
 
-<p class="muted">Welcome back,</p>
-<h1 id="homeName">Arup Sinha 👑</h1>
-<p class="small" id="homeRole">Founder</p>
+  <!-- NOISE -->
+  <section class="page" id="page-noise">
+   <div class="hero"><span class="pill">MICROPHONE ANALYSIS</span><h1>Noise Monitor</h1><p class="muted">Live sound analysis in your browser. Audio is processed locally and is not recorded or uploaded.</p></div>
+   <div class="two">
+    <div class="card">
+     <h3>Scan configuration</h3>
+     <label>School / Location<input id="scanLocation" placeholder="School name"></label>
+     <label>Class<input id="scanClass" placeholder="Class 10 A"></label>
+     <label>Total students<input type="number" id="totalStudents" min="1" placeholder="44"></label>
+     <label>Students present<input type="number" id="presentStudents" min="0" placeholder="38"></label>
+     <label>Activity<select id="activity"><option>Regular lesson</option><option>Group discussion</option><option>Examination</option><option>Break</option><option>Assembly</option></select></label>
+     <label>Duration<select id="duration"><option value="5">5 seconds</option><option value="10">10 seconds</option><option value="30" selected>30 seconds</option><option value="300">5 minutes</option><option value="0">Continuous until stopped</option></select></label>
+     <div class="notice">Student count is stored as context only. It never changes the measured sound score.</div><br>
+     <button class="btn" id="startScan" onclick="startScan()">Allow microphone & Start</button>
+     <button class="btn danger hidden" id="stopScanBtn" onclick="stopScan()">Stop scan</button>
+     <p id="scanStatus" class="small">Microphone is off.</p>
+    </div>
+    <div class="card">
+     <h3>Live noise intensity</h3>
+     <div class="gauge" id="gauge"><div class="gaugeContent"><strong id="noiseScore">--</strong><span class="small">Index / 100</span></div></div>
+     <div style="text-align:center"><b id="noiseLabel">Waiting for scan</b></div>
+     <div class="small" style="text-align:center">Relative custom index, not calibrated dB SPL.</div>
+     <div class="line"><span>Estimated input level</span><b id="noiseDb">-- dBFS</b></div>
+     <div class="line"><span>Peak index</span><b id="noisePeak">--</b></div>
+     <div class="line"><span>Elapsed</span><b id="elapsed">0 sec</b></div>
+     <div class="line"><span>Average index</span><b id="noiseAverage">--</b></div>
+    </div>
+   </div>
+   <div class="card"><h3>Live sound trend</h3><canvas id="noiseChart"></canvas></div>
+   <div class="card"><h3>Last scan report</h3><div id="lastScanReport" class="small">No scan completed.</div></div>
+  </section>
 
-<div class="hero">
-<div class="pill">✦ YOUR AI COMPANION</div>
-<h2>Meet LifeLens AI</h2>
-<p>Your world, understood differently.</p>
-<button class="primary" onclick="showPage('chat')">Chat with LifeLens →</button>
-</div>
+  <!-- CLASS MAPPER -->
+  <section class="page" id="page-mapper">
+   <div class="hero"><span class="pill">CLASSROOM ORGANISATION</span><h1>Class Mapper</h1><p class="muted">Save classroom details and associate scans with a class. A real spatial heatmap needs readings from multiple locations or devices.</p></div>
+   <div class="card">
+    <h3>Add classroom</h3>
+    <label>Class name<input id="mapClass" placeholder="Class 10 A"></label>
+    <label>Total students<input type="number" id="mapCount" min="1" placeholder="44"></label>
+    <button class="btn" onclick="saveClass()">Save classroom</button>
+    <div id="classList" style="margin-top:15px"></div>
+   </div>
+  </section>
 
-<div class="section-head">
-<h2>Explore Features</h2>
-<span class="small">DISCOVER MORE ✦</span>
-</div>
+  <!-- MCQ -->
+  <section class="page" id="page-mcq">
+   <div class="hero"><span class="pill">ADVANCED LEARNING</span><h1>MCQ Academy</h1><p class="muted">Expert-level mixed-subject practice. Complete a short round, review your results, and continue whenever you want.</p></div>
+   <div class="card" id="quizSetup">
+    <h3>Configure challenge</h3>
+    <label>Questions per round<select id="roundSize"><option value="10">10 questions</option><option value="20">20 questions</option></select></label>
+    <label>Subject<select id="quizSubject"><option>Mixed subjects</option><option>Physics</option><option>Chemistry</option><option>Mathematics</option><option>Biology</option><option>Computer Science</option></select></label>
+    <button class="btn" onclick="beginQuiz()">Start Expert Challenge</button>
+    <p class="small" id="bankCount"></p>
+    <div class="notice">This version contains 20 starter questions. The full 500+ verified question bank is a separate content expansion.</div>
+   </div>
+   <div class="card hidden" id="quizPlay">
+    <div style="display:flex;justify-content:space-between"><b id="quizSubjectTitle">Mixed subjects</b><span class="small" id="questionCounter"></span></div>
+    <div class="progress" style="margin:14px 0"><div id="quizProgress"></div></div>
+    <div class="question" id="questionText"></div>
+    <div id="options"></div>
+    <p class="small" id="answerFeedback"></p>
+    <div style="display:flex;justify-content:space-between;gap:8px;margin-top:15px">
+     <button class="btn secondary" onclick="endQuizEarly()">End round</button>
+     <button class="btn" id="nextQuestion" onclick="nextQuestion()" disabled>Next question</button>
+    </div>
+   </div>
+   <div class="card hidden" id="quizResult">
+    <span class="pill">ROUND RESULTS</span><h2>Challenge completed</h2>
+    <div class="stat" id="resultScore">0/10</div><h3 id="resultRating"></h3>
+    <div class="progress"><div id="resultBar"></div></div>
+    <div class="three" style="margin-top:15px">
+     <div class="card"><div class="stat" id="resultCorrect">0</div><div class="statlabel">Correct</div></div>
+     <div class="card"><div class="stat" id="resultWrong">0</div><div class="statlabel">Incorrect</div></div>
+     <div class="card"><div class="stat" id="resultPercent">0%</div><div class="statlabel">Accuracy</div></div>
+    </div>
+    <h3>Answer review</h3><div id="answerReview"></div>
+    <button class="btn" style="margin-top:15px" onclick="continueQuiz()">Continue with another round</button>
+    <button class="btn secondary" style="margin-top:15px" onclick="resetQuiz()">Back to Academy</button>
+   </div>
+  </section>
 
-<div class="grid">
-<button class="feature" onclick="openFeature('scan')">
-<div class="emoji">📷</div>
-<h3>Live Scan</h3>
-<p>Explore your surroundings</p>
-<div class="explore">EXPLORE →</div>
-</button>
+  <!-- ARENA -->
+  <section class="page" id="page-arena">
+   <div class="hero"><span class="pill">CHALLENGE ARENA</span><h1>Compete with yourself</h1><p class="muted">Build a personal record through advanced practice rounds.</p></div>
+   <div class="card"><h3>Your best performance</h3><div class="stat" id="arenaBest">0%</div><p class="muted">Best recorded round accuracy</p><button class="btn" onclick="openPage('mcq')">Start a challenge</button></div>
+  </section>
 
-<button class="feature" onclick="showPage('chat')">
-<div class="emoji">🧠</div>
-<h3>AI Assistant</h3>
-<p>Your intelligent companion</p>
-<div class="explore">EXPLORE →</div>
-</button>
+  <!-- ASSISTANT -->
+  <section class="page" id="page-assistant">
+   <div class="hero"><span class="pill">NOISEMAP HELPER</span><h1>Assistant</h1><p class="muted">A built-in guide for using NOISEMAP.</p></div>
+   <div class="card">
+    <div id="chatMessages" style="min-height:180px"><p class="notice">Hello! Ask me about noise scans, MCQ Academy, profiles or reports. This is an offline help assistant, not a connected AI model.</p></div>
+    <form id="chatForm"><input id="chatInput" placeholder="Ask something about NOISEMAP..." required><button class="btn" style="margin-top:10px">Send</button></form>
+   </div>
+  </section>
 
-<button class="feature" onclick="openFeature('study')">
-<div class="emoji">📚</div>
-<h3>Study Assistant</h3>
-<p>Learn something new</p>
-<div class="explore">EXPLORE →</div>
-</button>
+  <!-- ANALYTICS -->
+  <section class="page" id="page-analytics">
+   <div class="hero"><span class="pill">PERFORMANCE DATA</span><h1>Analytics</h1></div>
+   <div class="grid">
+    <div class="card"><div class="stat" id="anaQuestions">0</div><div class="statlabel">Questions</div></div>
+    <div class="card"><div class="stat" id="anaAccuracy">0%</div><div class="statlabel">Accuracy</div></div>
+    <div class="card"><div class="stat" id="anaScans">0</div><div class="statlabel">Scans</div></div>
+    <div class="card"><div class="stat" id="anaBest">0%</div><div class="statlabel">Best round</div></div>
+   </div>
+   <div class="card"><h3>Round performance</h3><canvas id="analyticsChart"></canvas></div>
+   <div class="card"><h3>Subject performance</h3><div id="subjectStats" class="small">Complete some quizzes to see subject statistics.</div></div>
+  </section>
 
-<button class="feature" onclick="openFeature('people')">
-<div class="emoji">👤</div>
-<h3>People Scanner</h3>
-<p>Explore visible details</p>
-<div class="explore">EXPLORE →</div>
-</button>
+  <!-- REPORTS -->
+  <section class="page" id="page-reports">
+   <div class="hero"><span class="pill">YOUR RECORDS</span><h1>Reports & History</h1><p class="muted">Review your local scan and quiz history.</p></div>
+   <div class="card"><h3>Export report</h3><p class="small">Download your activity summary as a text report.</p><button class="btn" onclick="exportReport()">Download report</button></div>
+   <div class="card"><h3>Quiz history</h3><div id="quizHistory"></div></div>
+   <div class="card"><h3>Noise scan history</h3><div id="scanHistory"></div></div>
+  </section>
 
-<button class="feature" onclick="openFeature('food')">
-<div class="emoji">🍎</div>
-<h3>Food Scanner</h3>
-<p>Discover food information</p>
-<div class="explore">EXPLORE →</div>
-</button>
+  <!-- PROFILE -->
+  <section class="page" id="page-profile">
+   <div class="hero"><span class="pill">PERSONAL PROFILE</span><h1>My Profile</h1></div>
+   <div class="card">
+    <h3>Account details</h3>
+    <div class="line"><span>Name</span><b id="profileName"></b></div>
+    <div class="line"><span>Email</span><b id="profileEmail"></b></div>
+    <div class="line"><span>School</span><b id="profileSchool"></b></div>
+    <div class="line"><span>Class / Role</span><b id="profileClass"></b></div>
+   </div>
+   <div class="card"><h3>My achievements</h3><div id="achievements" class="small"></div></div>
+  </section>
 
-<button class="feature" onclick="showPage('history')">
-<div class="emoji">🕘</div>
-<h3>Recent Activity</h3>
-<p>Your recent interactions</p>
-<div class="explore">EXPLORE →</div>
-</button>
-</div>
-
-<button class="founders-btn" onclick="showPage('founders')">
-👑 MEET THE FOUNDERS
-</button>
-</section>
-
-<!-- CHAT -->
-<section id="chatPage" class="page hidden">
-<h1 class="page-title">LifeLens AI ✦</h1>
-<p class="page-sub">Your personal AI companion</p>
-
-<div class="card">
-<div class="chat-box" id="chatMessages">
-<div class="empty">
-<div class="symbol">✦</div>
-<h2>How can I help you?</h2>
-<p class="small">Ask LifeLens something to get started.</p>
-</div>
-</div>
-
-<div class="chat-controls">
-<input class="input" id="chatInput" placeholder="Ask LifeLens anything..." onkeydown="if(event.key==='Enter')sendMessage()">
-<button class="send" onclick="sendMessage()">➤</button>
-</div>
-</div>
-</section>
-
-<!-- FOUNDERS -->
-<section id="foundersPage" class="page hidden">
-<h1 class="page-title">The Minds Behind</h1>
-<h1 class="logo">LIFELENS ✦</h1>
-<p class="page-sub">THREE LEADERS. ONE VISION.</p>
-<div id="foundersList"></div>
-<p class="small" style="text-align:center;margin-top:25px">
-BUILT WITH VISION. POWERED BY CURIOSITY.
-</p>
-</section>
-
-<!-- PROFILE -->
-<section id="profilePage" class="page hidden">
-<h1 class="page-title">My Profile</h1>
-
-<div class="card" style="text-align:center;padding:35px">
-<div class="founder-avatar" id="profileAvatar">A</div>
-<h2 id="profileName">Arup Sinha</h2>
-<p class="role" id="profileRole">Founder</p>
-</div>
-
-<h2>Settings</h2>
-
-<div class="setting">
-<span>🔊 Voice Greeting</span>
-<button onclick="toggleVoice()" id="voiceToggle">ON</button>
-</div>
-
-<div class="setting">
-<span>👑 Founders</span>
-<button onclick="showPage('founders')">VIEW →</button>
-</div>
-
-<div class="setting">
-<span>🕘 Activity History</span>
-<button onclick="showPage('history')">VIEW →</button>
-</div>
-
-<button class="logout" onclick="logout()">LOG OUT</button>
-</section>
-
-<!-- HISTORY -->
-<section id="historyPage" class="page hidden">
-<h1 class="page-title">Recent Activity</h1>
-<p class="page-sub">Your recent questions</p>
-<div id="historyList"></div>
-</section>
-
-<!-- SCAN -->
-<section id="scanPage" class="page hidden">
-<h1 class="page-title">📷 Live Scan</h1>
-<p class="page-sub">Explore your surroundings</p>
-<div class="card">
-<video id="cameraVideo" autoplay playsinline></video>
-<p class="small" style="margin-top:12px">
-Camera preview. Visual AI recognition requires a connected vision service.
-</p>
-<button class="primary" onclick="startCamera()">START CAMERA</button>
-<button class="secondary" style="width:100%;margin-top:10px" onclick="stopCamera()">STOP CAMERA</button>
-</div>
-</section>
-
-<!-- FEATURE PLACEHOLDER -->
-<section id="featurePage" class="page hidden">
-<h1 class="page-title" id="featureTitle">Study Assistant</h1>
-<p class="page-sub" id="featureSubtitle">Explore more with LifeLens</p>
-<div class="card">
-<div style="font-size:50px;text-align:center;margin:20px" id="featureEmoji">📚</div>
-<h2 id="featureHeading">Coming soon</h2>
-<p id="featureDescription" class="muted"></p>
-<button class="primary" onclick="showPage('chat')">ASK LIFELENS AI →</button>
-</div>
-</section>
-
-</main>
-
-<!-- BOTTOM NAVIGATION -->
-<nav class="nav">
-<button class="active" data-page="home" onclick="showPage('home')">
-<span>⌂</span>Home
-</button>
-<button data-page="chat" onclick="showPage('chat')">
-<span>✦</span>AI Chat
-</button>
-<button data-page="founders" onclick="showPage('founders')">
-<span>👑</span>Founders
-</button>
-<button data-page="history" onclick="showPage('history')">
-<span>◷</span>History
-</button>
-<button data-page="profile" onclick="showPage('profile')">
-<span>◉</span>Profile
-</button>
-</nav>
-</div>
-
-<!-- POPUP -->
-<div class="modal hidden" id="modal">
-<div class="modal-content">
-<h2 id="modalTitle">LifeLens</h2>
-<p id="modalText"></p>
-<button class="primary" onclick="closeModal()">CLOSE</button>
-</div>
+  <!-- SETTINGS -->
+  <section class="page" id="page-settings">
+   <div class="hero"><span class="pill">PREFERENCES</span><h1>Settings</h1></div>
+   <div class="card">
+    <h3>Local account settings</h3>
+    <p class="small">Your demo profile and activity are stored in this browser.</p>
+    <button class="btn secondary" onclick="exportReport()">Export my data</button>
+    <button class="btn danger" onclick="clearMyData()">Clear local activity</button>
+   </div>
+   <div class="card"><h3>About NOISEMAP</h3><p class="muted">A classroom noise intelligence and advanced learning prototype.</p><p class="small">Founder: Arup Sinha | CEO: Raj Chorei | Co-Founder: Nathan Ranglong</p></div>
+  </section>
+ </main>
 </div>
 
 <script>
-const accounts=[
-{name:'Arup Sinha',role:'Founder',initial:'A'},
-{name:'Raj Chorei',role:'CEO',initial:'R'},
-{name:'Nathan Ranglong',role:'Co-Founder',initial:'N'}
-];
-
-const founders=[
-{
-name:'Arup Sinha',
-role:'Founder',
-initial:'A',
-description:'The visionary behind LifeLens. Leading the vision to create a platform that helps people scan, discover and understand the world.'
-},
-{
-name:'Raj Chorei',
-role:'CEO',
-initial:'R',
-description:'Leading LifeLens operations and helping turn the vision into reality as Chief Executive Officer.'
-},
-{
-name:'Nathan Ranglong',
-role:'Co-Founder',
-initial:'N',
-description:'A Co-Founder of LifeLens, contributing to the shared vision and development of the platform.'
-}
-];
-
-let selected=accounts[0];
-let voiceOn=true;
-let messages=[];
-let history=[];
-let cameraStream=null;
-
+"use strict";
 const $=id=>document.getElementById(id);
-
-function renderAccounts(){
-$('accountList').innerHTML=accounts.map((a,i)=>`
-<div class="account ${selected.name===a.name?'selected':''}"
-onclick="selectAccount(${i})">
-<div class="account-icon">${a.initial}</div>
-<div class="account-info">
-<strong>${a.name}</strong>
-<small>${a.role}</small>
-</div>
-<span>${selected.name===a.name?'✓':'○'}</span>
-</div>
-`).join('');
-}
-
-function selectAccount(i){
-selected=accounts[i];
-renderAccounts();
-}
-
-function login(){
-const username=$('username').value.trim();
-const password=$('password').value.trim();
-
-if(!username||!password){
-showModal('Login required','Please enter your username and password.');
-return;
-}
-
-$('loginScreen').classList.add('hidden');
-$('mainApp').classList.remove('hidden');
-
-updateProfile();
-showPage('home');
-
-if(voiceOn){
-setTimeout(()=>speak('Welcome to LifeLens. How can I help you today?'),700);
-}
-}
-
-function updateProfile(){
-$('homeName').textContent=selected.name+' 👑';
-$('homeRole').textContent=selected.role;
-$('homeAvatar').textContent=selected.initial;
-$('profileAvatar').textContent=selected.initial;
-$('profileName').textContent=selected.name;
-$('profileRole').textContent=selected.role;
-}
-
-function logout(){
-stopCamera();
-if('speechSynthesis' in window)speechSynthesis.cancel();
-$('mainApp').classList.add('hidden');
-$('loginScreen').classList.remove('hidden');
-$('username').value='';
-$('password').value='';
-messages=[];
-history=[];
-$('chatMessages').innerHTML='';
-$('historyList').innerHTML='';
-}
-
-function showPage(page){
-document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
-const target=$(page+'Page');
-if(target)target.classList.remove('hidden');
-
-document.querySelectorAll('.nav button').forEach(b=>{
-b.classList.toggle('active',b.dataset.page===page);
-});
-
-if(page==='history')renderHistory();
-if(page==='founders')renderFounders();
-}
-
-function showModal(title,text){
-$('modalTitle').textContent=title;
-$('modalText').textContent=text;
-$('modal').classList.remove('hidden');
-}
-
-function closeModal(){
-$('modal').classList.add('hidden');
-}
-
-function toggleVoice(){
-voiceOn=!voiceOn;
-$('voiceToggle').textContent=voiceOn?'ON':'OFF';
-if(!voiceOn&&'speechSynthesis' in window)speechSynthesis.cancel();
-}
-
-function speak(text){
-if(!voiceOn||!('speechSynthesis' in window))return;
-speechSynthesis.cancel();
-const utterance=new SpeechSynthesisUtterance(text);
-utterance.lang='en-IN';
-utterance.rate=.9;
-speechSynthesis.speak(utterance);
-}
-
-function getAnswer(question){
-const q=question.toLowerCase().trim();
-
-if(q.includes('who is your master')||q.includes('who created you')||q.includes('who is the master')){
-return 'My master is Lord Arup Sinha. The Majesty himself! 👑';
-}
-
-if(q.includes('who is arup')){
-return 'Arup Sinha is the Founder of LifeLens. The visionary behind the LifeLens vision. 👑';
-}
-
-if(q.includes('who is raj')){
-return 'Raj Chorei is the CEO of LifeLens. 👑';
-}
-
-if(q.includes('who is nathan')||q.includes('who is ranglong')){
-return 'Nathan Ranglong is the Co-Founder of LifeLens. 👑';
-}
-
-if(q.includes('who are the founders')||q.includes('founders of lifelens')){
-return 'The LifeLens leadership team: Arup Sinha — Founder, Raj Chorei — CEO, and Nathan Ranglong — Co-Founder. Three leaders, one vision. 💜';
-}
-
-if(q.includes('hello')||q==='hi'||q.includes('hey')){
-return 'Hello! Welcome to LifeLens. How can I help you today? 💜';
-}
-
-if(q.includes('what is lifelens')){
-return 'LifeLens is an AI-powered exploration platform designed to help people scan, discover and understand the world around them.';
-}
-
-if(q.includes('what can you do')||q.includes('features')){
-return 'I can help you explore LifeLens features including AI Chat, Live Scan, Study Assistant, People Scanner, Food Scanner, Founders and Recent Activity.';
-}
-
-if(q.includes('ceo')){
-return 'Raj Chorei is the CEO of LifeLens.';
-}
-
-if(q.includes('founder')){
-return 'Arup Sinha is the Founder of LifeLens.';
-}
-
-if(q.includes('co-founder')){
-return 'Nathan Ranglong is the Co-Founder of LifeLens.';
-}
-
-return "I'm LifeLens AI. I can answer my programmed questions right now. For general intelligent answers, connect an AI API through a secure backend.";
-}
-
-function sendMessage(){
-const input=$('chatInput');
-const clean=input.value.trim();
-if(!clean)return;
-
-const answer=getAnswer(clean);
-
-messages.push({type:'user',text:clean});
-messages.push({type:'ai',text:answer});
-
-history.unshift(clean);
-history=history.slice(0,20);
-
-input.value='';
-renderMessages();
-speak(answer);
-}
-
-function renderMessages(){
-const box=$('chatMessages');
-box.innerHTML='';
-
-messages.forEach(msg=>{
-const div=document.createElement('div');
-div.className='message '+(msg.type==='user'?'user-msg':'ai-msg');
-
-const label=document.createElement('div');
-label.className='msg-label';
-label.textContent=msg.type==='user'?'YOU':'LIFELENS';
-
-const text=document.createElement('div');
-text.className='msg-text';
-text.textContent=msg.text;
-
-div.append(label,text);
-
-if(msg.type==='ai'){
-const listen=document.createElement('button');
-listen.textContent='🔊 Listen';
-listen.className='secondary';
-listen.style.marginTop='10px';
-listen.onclick=()=>speak(msg.text);
-div.appendChild(listen);
-}
-
-box.appendChild(div);
-});
-
-box.scrollTop=box.scrollHeight;
-}
-
-function renderHistory(){
-const list=$('historyList');
-if(!history.length){
-list.innerHTML='<p class="muted">No activity yet. Start exploring LifeLens!</p>';
-return;
-}
-
-list.innerHTML='';
-history.forEach(item=>{
-const btn=document.createElement('button');
-btn.className='history-item';
-btn.textContent='💬 '+item;
-btn.onclick=()=>{
-showPage('chat');
-$('chatInput').value=item;
+const store={
+ get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},
+ set(k,v){localStorage.setItem(k,JSON.stringify(v))}
 };
-list.appendChild(btn);
-});
-}
+let currentUser=null,profile=null,authMode="login";
+let scanStream=null,audioCtx=null,analyser=null,scanTimer=null,scanStarted=0;
+let scanValues=[],scanPeak=0,scanRunning=false,raf=0;
+let quiz=[],quizIndex=0,quizAnswers=[],selected=-1,quizDone=false;
 
-function renderFounders(){
-$('
+function userKey(s){return "noisemap_"+currentUser+"_"+s}
+function getData(s,d){return store.get(userKey(s),d)}
+function putData(s,v){store.set(userKey(s),v)}
+function setAuth(mode){
+ authMode=mode;
+ $("authTitle").textContent=mode==="login"?"Welcome bac
