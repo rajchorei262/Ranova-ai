@@ -5,221 +5,861 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LifeLens AI</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#0b1220;color:white;font-family:Arial,sans-serif}
-header{padding:22px 18px;background:#111d30;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #26374d}
-.logo{font-size:24px;font-weight:bold;color:#63dfc4}
-.tag{font-size:11px;color:#9aaec1}
-main{padding:18px;padding-bottom:90px}
-h2{font-size:21px}
-h3{margin:8px 0}
-.sub{color:#9baec1;font-size:13px}
-.hero{background:linear-gradient(135deg,#124e50,#193c59);padding:23px;border-radius:20px;margin-bottom:22px}
-.hero h2{font-size:25px;margin-top:0}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}
-.card{background:#17243a;border:1px solid #293b53;border-radius:16px;padding:17px;cursor:pointer;min-height:115px}
-.card:active{transform:scale(.97)}
-.emoji{font-size:28px}
-.card p{font-size:12px;color:#9eafc1;margin-bottom:0}
-.section{margin-top:26px}
-button{background:#62d9c1;border:0;padding:13px 17px;border-radius:12px;color:#071b20;font-weight:bold;cursor:pointer}
-.secondary{background:#263a50;color:white}
-input,textarea,select{width:100%;padding:14px;border:1px solid #344861;border-radius:12px;background:#17243a;color:white;margin:8px 0;outline:none}
-textarea{resize:vertical}
-.panel{background:#17243a;border-radius:17px;padding:17px;margin-top:15px}
-nav{position:fixed;bottom:0;left:0;width:100%;background:#111d30;display:flex;justify-content:space-around;padding:12px 3px;border-top:1px solid #293b53}
-nav button{background:transparent;color:#b4c6d5;padding:8px 5px;font-size:11px}
-nav button.active{color:#62d9c1}
-.page{display:none}
-.page.active{display:block}
-.message{background:#263a50;padding:13px;border-radius:13px;margin:10px 0;max-width:90%;white-space:pre-wrap;line-height:1.5}
-.user{margin-left:auto;background:#17635f}
-img.preview{width:100%;max-height:260px;object-fit:contain;border-radius:12px;margin-top:12px}
-.result{background:#20364a;padding:15px;border-radius:14px;margin-top:12px}
-.small{font-size:12px;color:#9eafc1}
-.item{background:#17243a;padding:13px;border-radius:12px;margin:9px 0}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#10091F;
+--card:#201431;
+--purple:#925BEB;
+--light:#D9C1FF;
+--muted:#AA98BD;
+}
+body{
+background:var(--bg);
+color:white;
+font-family:Arial,sans-serif;
+min-height:100vh;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+.app{
+max-width:1100px;
+margin:auto;
+padding:20px;
+padding-bottom:95px;
+}
+.hidden{display:none!important}
+.logo{
+font-size:25px;
+font-weight:900;
+letter-spacing:2px;
+color:#D9C1FF;
+}
+.tagline{
+font-size:10px;
+letter-spacing:3px;
+color:#AA98BD;
+margin-top:7px;
+}
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:35px;
+}
+.avatar{
+width:48px;height:48px;
+border-radius:50%;
+background:linear-gradient(135deg,#B184FF,#7742D0);
+display:grid;place-items:center;
+font-weight:bold;font-size:21px;
+}
+h1{font-size:28px;margin:12px 0}
+h2{font-size:21px;margin-bottom:12px}
+p{line-height:1.6}
+.muted{color:var(--muted)}
+.small{font-size:12px;color:var(--muted)}
+.card{
+background:linear-gradient(140deg,#302047,#1C112C);
+border:1px solid #493263;
+border-radius:20px;
+padding:20px;
+margin:16px 0;
+}
+.hero{
+background:linear-gradient(130deg,#844CD7,#4B267E,#211332);
+padding:28px 22px;
+border-radius:24px;
+margin:25px 0;
+box-shadow:0 10px 35px #5c329b33;
+}
+.hero h2{font-size:27px;margin:13px 0}
+.hero p{color:#E9D9FF}
+.pill{
+font-size:11px;
+letter-spacing:2px;
+color:#E4CCFF;
+}
+.primary{
+background:linear-gradient(100deg,#B184FF,#7742D0);
+border:0;
+border-radius:12px;
+padding:14px 20px;
+color:white;
+font-weight:bold;
+margin-top:18px;
+width:100%;
+}
+.secondary{
+background:#34204B;
+border:1px solid #65468A;
+color:white;
+border-radius:11px;
+padding:12px 15px;
+}
+.section-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin:27px 0 16px;
+}
+.grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:13px;
+}
+.feature{
+background:linear-gradient(145deg,#302047,#1C112C);
+border:1px solid #493263;
+border-radius:17px;
+padding:17px 13px;
+min-height:155px;
+text-align:left;
+color:white;
+transition:.2s;
+}
+.feature:active{transform:scale(.97)}
+.feature .emoji{font-size:29px}
+.feature h3{font-size:15px;margin:13px 0 6px}
+.feature p{font-size:11px;color:#B5A3C7}
+.explore{
+color:#C8A7FF;
+font-size:10px;
+font-weight:bold;
+margin-top:14px;
+letter-spacing:1px;
+}
+.founders-btn{
+width:100%;
+padding:17px;
+background:linear-gradient(100deg,#4A286F,#29183C);
+border:1px solid #74509C;
+border-radius:15px;
+color:white;
+font-weight:bold;
+margin-top:23px;
+}
+.page-title{font-size:27px;margin:15px 0 8px}
+.page-sub{color:var(--muted);font-size:13px;margin-bottom:22px}
+.input{
+width:100%;
+background:#160D24;
+border:1px solid #543C70;
+border-radius:12px;
+padding:15px;
+color:white;
+outline:none;
+margin:9px 0 17px;
+}
+.input:focus{border-color:#B184FF}
+label{
+font-size:11px;
+letter-spacing:1px;
+color:#D9C1FF;
+}
+.account{
+display:flex;
+align-items:center;
+gap:12px;
+padding:13px;
+border:1px solid #493263;
+border-radius:13px;
+margin:10px 0;
+cursor:pointer;
+}
+.account.selected{
+border-color:#B184FF;
+background:#38234E;
+}
+.account-icon{
+width:40px;height:40px;
+background:#67409A;
+border-radius:50%;
+display:grid;place-items:center;
+font-weight:bold;
+}
+.account-info{flex:1}
+.account-info strong{display:block;font-size:14px}
+.account-info small{color:#B5A3C7}
+#loginScreen{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+background:radial-gradient(ellipse at top,#392052,#10091F 65%);
+}
+.login-wrap{width:100%;max-width:440px}
+.login-logo{
+text-align:center;
+font-size:32px;
+font-weight:900;
+color:#D9C1FF;
+letter-spacing:3px;
+animation:pulse 2s infinite;
+}
+.login-tag{
+text-align:center;
+font-size:10px;
+letter-spacing:3px;
+color:#AA98BD;
+margin:13px 0 30px;
+}
+.login-card{
+background:#201431;
+border:1px solid #493263;
+border-radius:22px;
+padding:23px;
+}
+.login-card h2{text-align:center}
+.login-card .muted{text-align:center;font-size:13px;margin-bottom:25px}
+.note{
+font-size:10px;
+color:#9B89AC;
+text-align:center;
+line-height:1.6;
+margin-top:16px;
+}
+@keyframes pulse{
+50%{text-shadow:0 0 20px #B184FF;transform:scale(1.04)}
+}
+.nav{
+position:fixed;
+bottom:0;
+left:0;right:0;
+background:#1B1028;
+border-top:1px solid #493263;
+display:flex;
+justify-content:space-around;
+padding:12px 4px calc(12px + env(safe-area-inset-bottom));
+z-index:10;
+}
+.nav button{
+background:none;border:0;color:#A895BB;
+font-size:10px;
+display:flex;flex-direction:column;
+align-items:center;gap:5px;
+}
+.nav button span{font-size:20px}
+.nav button.active{color:#D9C1FF}
+.message{
+padding:14px;
+border-radius:15px;
+margin:12px 0;
+max-width:90%;
+}
+.user-msg{
+background:#51347B;
+margin-left:auto;
+}
+.ai-msg{
+background:#281A39;
+border:1px solid #493263;
+}
+.msg-label{
+font-size:10px;
+color:#D9C1FF;
+font-weight:bold;
+margin-bottom:8px;
+}
+.msg-text{font-size:14px;line-height:1.6;white-space:pre-wrap}
+.chat-box{
+height:52vh;
+overflow-y:auto;
+padding:5px 0;
+}
+.chat-controls{
+display:flex;gap:8px;
+padding:12px 0;
+}
+.chat-controls input{margin:0;flex:1;min-width:0}
+.send{
+width:50px;
+background:#925BEB;
+border:0;border-radius:12px;color:white;
+font-size:20px;
+}
+.empty{
+text-align:center;
+padding:65px 10px;
+}
+.empty .symbol{font-size:55px;color:#D9C1FF}
+.founder{
+background:linear-gradient(140deg,#432568,#211332);
+border:1px solid #65468A;
+padding:23px;
+border-radius:20px;
+text-align:center;
+margin:17px 0;
+}
+.founder-avatar{
+width:75px;height:75px;
+border-radius:50%;
+background:linear-gradient(135deg,#B184FF,#7742D0);
+display:grid;place-items:center;
+font-size:30px;font-weight:bold;
+margin:0 auto 15px;
+}
+.founder h2{margin:8px}
+.role{color:#D9C1FF;font-size:12px;font-weight:bold}
+.description{
+color:#C2B2D0;
+font-size:13px;
+margin-top:12px;
+line-height:1.6;
+}
+.setting{
+display:flex;justify-content:space-between;
+align-items:center;
+background:#241733;
+border:1px solid #493263;
+border-radius:13px;
+padding:17px;
+margin:12px 0;
+}
+.setting button{background:none;border:0;color:#D9C1FF}
+.logout{
+background:#612A50;
+border:1px solid #A04C81;
+border-radius:12px;
+color:white;
+padding:15px;width:100%;
+margin-top:25px;
+}
+.history-item{
+background:#251832;
+border:1px solid #493263;
+padding:16px;
+border-radius:13px;
+margin:12px 0;
+color:white;
+width:100%;
+text-align:left;
+}
+.modal{
+position:fixed;inset:0;
+background:#000B;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+z-index:30;
+}
+.modal-content{
+width:100%;max-width:380px;
+background:#251832;
+border:1px solid #74509C;
+border-radius:20px;
+padding:23px;
+}
+.modal-content h2{color:#D9C1FF}
+.modal-content p{font-size:14px;color:#C7B5D7;margin-top:12px}
+.modal-content button{margin-top:20px}
+#cameraVideo{
+width:100%;
+border-radius:15px;
+background:#080510;
+max-height:400px;
+}
+@media(min-width:650px){
+.grid{grid-template-columns:repeat(3,1fr)}
+.app{padding-top:30px}
+}
 </style>
 </head>
+
 <body>
-<header>
-<div><div class="logo">✦ LifeLens</div><div class="tag">SEE MORE. LEARN MORE.</div></div>
-<div>🌙</div>
-</header>
-<main>
-<div class="page active" id="home">
+
+<!-- LOGIN -->
+<section id="loginScreen">
+<div class="login-wrap">
+<div class="login-logo">✦ LIFELENS</div>
+<div class="login-tag">SCAN. DISCOVER. UNDERSTAND.</div>
+
+<div class="login-card">
+<h2>Welcome Back</h2>
+<p class="muted">Sign in to enter your world.</p>
+
+<label>SELECT ACCOUNT</label>
+<div id="accountList"></div>
+
+<label>USERNAME</label>
+<input id="username" class="input" placeholder="Enter username" autocomplete="username">
+
+<label>PASSWORD</label>
+<input id="password" type="password" class="input" placeholder="Enter password" autocomplete="current-password">
+
+<button class="primary" onclick="login()">LOGIN →</button>
+
+<p class="note">
+LifeLens demonstration login. This is not real authentication.
+</p>
+</div>
+<p class="note">POWERED BY THE LIFELENS VISION</p>
+</div>
+</section>
+
+<!-- MAIN APP -->
+<div id="mainApp" class="hidden">
+<main class="app">
+
+<!-- HOME -->
+<section id="homePage" class="page">
+<div class="header">
+<div>
+<div class="logo">LIFELENS ✦</div>
+<div class="tagline">YOUR WORLD, REIMAGINED</div>
+</div>
+<button class="avatar" id="homeAvatar" onclick="showPage('profile')">A</button>
+</div>
+
+<p class="muted">Welcome back,</p>
+<h1 id="homeName">Arup Sinha 👑</h1>
+<p class="small" id="homeRole">Founder</p>
+
 <div class="hero">
-<p>WELCOME TO LIFELENS</p>
-<h2>Discover the world around you.</h2>
-<p class="sub">Explore, understand and learn something new every day.</p>
-<button onclick="showPage('scan')">Start Exploring →</button>
+<div class="pill">✦ YOUR AI COMPANION</div>
+<h2>Meet LifeLens AI</h2>
+<p>Your world, understood differently.</p>
+<button class="primary" onclick="showPage('chat')">Chat with LifeLens →</button>
 </div>
-<h2>Explore LifeLens</h2>
+
+<div class="section-head">
+<h2>Explore Features</h2>
+<span class="small">DISCOVER MORE ✦</span>
+</div>
+
 <div class="grid">
-<div class="card" onclick="openScan('Nature')"><div class="emoji">🌿</div><h3>Nature Scanner</h3><p>Explore plants, animals and nature.</p></div>
-<div class="card" onclick="openScan('People')"><div class="emoji">👤</div><h3>People Scanner</h3><p>Understand visible details and activities.</p></div>
-<div class="card" onclick="openScan('Objects')"><div class="emoji">📦</div><h3>Object Scanner</h3><p>Discover everyday objects.</p></div>
-<div class="card" onclick="openScan('Environment')"><div class="emoji">🌍</div><h3>Environment</h3><p>Explore your surroundings.</p></div>
-<div class="card" onclick="openScan('Places')"><div class="emoji">🏛️</div><h3>Places Scanner</h3><p>Explore buildings and places.</p></div>
-<div class="card" onclick="showPage('notes')"><div class="emoji">📚</div><h3>Smart Notes</h3><p>Learn from your study materials.</p></div>
-</div>
-<div class="section"><h2>Your AI Assistant</h2><div class="panel"><p>💬 Ask anything. Learn anything.</p><button onclick="showPage('assistant')">Chat with AI →</button></div></div>
-<div class="section"><h2>Learning Zone</h2><div class="grid">
-<div class="card" onclick="showPage('quiz')"><div class="emoji">🧠</div><h3>Quizzes</h3><p>Test your knowledge.</p></div>
-<div class="card" onclick="showPage('library')"><div class="emoji">📁</div><h3>My Library</h3><p>Your saved discoveries.</p></div>
-</div></div>
+<button class="feature" onclick="openFeature('scan')">
+<div class="emoji">📷</div>
+<h3>Live Scan</h3>
+<p>Explore your surroundings</p>
+<div class="explore">EXPLORE →</div>
+</button>
+
+<button class="feature" onclick="showPage('chat')">
+<div class="emoji">🧠</div>
+<h3>AI Assistant</h3>
+<p>Your intelligent companion</p>
+<div class="explore">EXPLORE →</div>
+</button>
+
+<button class="feature" onclick="openFeature('study')">
+<div class="emoji">📚</div>
+<h3>Study Assistant</h3>
+<p>Learn something new</p>
+<div class="explore">EXPLORE →</div>
+</button>
+
+<button class="feature" onclick="openFeature('people')">
+<div class="emoji">👤</div>
+<h3>People Scanner</h3>
+<p>Explore visible details</p>
+<div class="explore">EXPLORE →</div>
+</button>
+
+<button class="feature" onclick="openFeature('food')">
+<div class="emoji">🍎</div>
+<h3>Food Scanner</h3>
+<p>Discover food information</p>
+<div class="explore">EXPLORE →</div>
+</button>
+
+<button class="feature" onclick="showPage('history')">
+<div class="emoji">🕘</div>
+<h3>Recent Activity</h3>
+<p>Your recent interactions</p>
+<div class="explore">EXPLORE →</div>
+</button>
 </div>
 
-<div class="page" id="scan">
-<h2>LifeLens Vision</h2>
-<p class="sub">Choose a category and upload a picture to explore it.</p>
-<select id="category">
-<option>Nature</option><option>People</option><option>Objects</option><option>Environment</option><option>Places</option><option>Notes & Books</option>
-</select>
-<div class="panel">
-<h3>📷 Choose an image</h3>
-<input type="file" id="photo" accept="image/*" capture="environment">
-<img id="preview" class="preview" style="display:none">
-<button onclick="scanImage()">Explore Image</button>
-</div>
-<div id="scanResult" class="result" style="display:none">
-<h3>✨ Discovery</h3><div id="resultText"></div><br>
-<button onclick="speakResult()">🔊 Listen</button>
-<button class="secondary" onclick="stopSpeech()">Stop</button>
-<button class="secondary" onclick="saveResult()">Save</button>
-<button class="secondary" onclick="showPage('assistant')">Ask AI</button>
-</div>
-</div>
+<button class="founders-btn" onclick="showPage('founders')">
+👑 MEET THE FOUNDERS
+</button>
+</section>
 
-<div class="page" id="assistant">
-<h2>✦ LifeLens AI</h2><p class="sub">Your personal learning assistant.</p>
-<div class="panel">
-<div id="chat"><div class="message">Hello! I'm your LifeLens assistant. What would you like to discover today?</div></div>
-<input id="question" placeholder="Ask LifeLens anything...">
-<button onclick="sendMessage()">Send →</button>
-</div>
-</div>
+<!-- CHAT -->
+<section id="chatPage" class="page hidden">
+<h1 class="page-title">LifeLens AI ✦</h1>
+<p class="page-sub">Your personal AI companion</p>
 
-<div class="page" id="notes">
-<h2>📚 Smart Notes</h2><p class="sub">Your personal learning space.</p>
-<div class="panel"><h3>Upload Study Material</h3><input type="file" accept="image/*,.pdf,.txt"><p class="small">Text extraction requires an additional service.</p></div>
-<div class="panel"><h3>Write Your Notes</h3>
-<input id="noteTitle" placeholder="Note title">
-<textarea id="noteContent" rows="6" placeholder="Write something..."></textarea>
-<button onclick="saveNote()">Save Note</button>
-</div>
-</div>
-
-<div class="page" id="quiz">
-<h2>🧠 Quizzes & Tests</h2><p class="sub">Challenge your knowledge.</p>
-<div class="panel">
-<h3>General Knowledge</h3><p>Which planet is known as the Red Planet?</p>
-<button class="secondary" onclick="answer(false)">Venus</button>
-<button class="secondary" onclick="answer(true)">Mars</button>
-<button class="secondary" onclick="answer(false)">Jupiter</button>
-<p id="quizResult"></p>
-<button onclick="showPage('assistant')">Ask AI to explain</button>
+<div class="card">
+<div class="chat-box" id="chatMessages">
+<div class="empty">
+<div class="symbol">✦</div>
+<h2>How can I help you?</h2>
+<p class="small">Ask LifeLens something to get started.</p>
 </div>
 </div>
 
-<div class="page" id="library">
-<h2>📁 My Library</h2><p class="sub">Your saved notes and discoveries.</p>
-<div id="savedItems"></div>
+<div class="chat-controls">
+<input class="input" id="chatInput" placeholder="Ask LifeLens anything..." onkeydown="if(event.key==='Enter')sendMessage()">
+<button class="send" onclick="sendMessage()">➤</button>
+</div>
+</div>
+</section>
+
+<!-- FOUNDERS -->
+<section id="foundersPage" class="page hidden">
+<h1 class="page-title">The Minds Behind</h1>
+<h1 class="logo">LIFELENS ✦</h1>
+<p class="page-sub">THREE LEADERS. ONE VISION.</p>
+<div id="foundersList"></div>
+<p class="small" style="text-align:center;margin-top:25px">
+BUILT WITH VISION. POWERED BY CURIOSITY.
+</p>
+</section>
+
+<!-- PROFILE -->
+<section id="profilePage" class="page hidden">
+<h1 class="page-title">My Profile</h1>
+
+<div class="card" style="text-align:center;padding:35px">
+<div class="founder-avatar" id="profileAvatar">A</div>
+<h2 id="profileName">Arup Sinha</h2>
+<p class="role" id="profileRole">Founder</p>
 </div>
 
-<div class="page" id="profile">
-<h2>⚙️ Settings & Profile</h2>
-<div class="panel">
-<h3>Voice Settings</h3>
-<label><input type="checkbox" id="voiceToggle" checked style="width:auto"> Enable spoken scan results</label>
-<p class="small">Voice narration settings.</p>
-<label>Speech speed</label>
-<input type="range" id="speed" min="0.7" max="1.4" step="0.1" value="1">
+<h2>Settings</h2>
+
+<div class="setting">
+<span>🔊 Voice Greeting</span>
+<button onclick="toggleVoice()" id="voiceToggle">ON</button>
 </div>
-<div class="panel"><h3>About LifeLens</h3><p class="sub">Discover more. Understand better. Keep learning.</p></div>
+
+<div class="setting">
+<span>👑 Founders</span>
+<button onclick="showPage('founders')">VIEW →</button>
 </div>
+
+<div class="setting">
+<span>🕘 Activity History</span>
+<button onclick="showPage('history')">VIEW →</button>
+</div>
+
+<button class="logout" onclick="logout()">LOG OUT</button>
+</section>
+
+<!-- HISTORY -->
+<section id="historyPage" class="page hidden">
+<h1 class="page-title">Recent Activity</h1>
+<p class="page-sub">Your recent questions</p>
+<div id="historyList"></div>
+</section>
+
+<!-- SCAN -->
+<section id="scanPage" class="page hidden">
+<h1 class="page-title">📷 Live Scan</h1>
+<p class="page-sub">Explore your surroundings</p>
+<div class="card">
+<video id="cameraVideo" autoplay playsinline></video>
+<p class="small" style="margin-top:12px">
+Camera preview. Visual AI recognition requires a connected vision service.
+</p>
+<button class="primary" onclick="startCamera()">START CAMERA</button>
+<button class="secondary" style="width:100%;margin-top:10px" onclick="stopCamera()">STOP CAMERA</button>
+</div>
+</section>
+
+<!-- FEATURE PLACEHOLDER -->
+<section id="featurePage" class="page hidden">
+<h1 class="page-title" id="featureTitle">Study Assistant</h1>
+<p class="page-sub" id="featureSubtitle">Explore more with LifeLens</p>
+<div class="card">
+<div style="font-size:50px;text-align:center;margin:20px" id="featureEmoji">📚</div>
+<h2 id="featureHeading">Coming soon</h2>
+<p id="featureDescription" class="muted"></p>
+<button class="primary" onclick="showPage('chat')">ASK LIFELENS AI →</button>
+</div>
+</section>
+
 </main>
 
-<nav>
-<button class="active" onclick="showPage('home',this)">🏠<br>Home</button>
-<button onclick="showPage('scan',this)">📷<br>Scan</button>
-<button onclick="showPage('assistant',this)">✦<br>AI</button>
-<button onclick="showPage('library',this)">📁<br>Library</button>
-<button onclick="showPage('profile',this)">👤<br>Profile</button>
+<!-- BOTTOM NAVIGATION -->
+<nav class="nav">
+<button class="active" data-page="home" onclick="showPage('home')">
+<span>⌂</span>Home
+</button>
+<button data-page="chat" onclick="showPage('chat')">
+<span>✦</span>AI Chat
+</button>
+<button data-page="founders" onclick="showPage('founders')">
+<span>👑</span>Founders
+</button>
+<button data-page="history" onclick="showPage('history')">
+<span>◷</span>History
+</button>
+<button data-page="profile" onclick="showPage('profile')">
+<span>◉</span>Profile
+</button>
 </nav>
+</div>
+
+<!-- POPUP -->
+<div class="modal hidden" id="modal">
+<div class="modal-content">
+<h2 id="modalTitle">LifeLens</h2>
+<p id="modalText"></p>
+<button class="primary" onclick="closeModal()">CLOSE</button>
+</div>
+</div>
 
 <script>
-let currentResult="";
-function showPage(name,button){
-document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-document.getElementById(name).classList.add('active');
-document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-if(button)button.classList.add('active');
+const accounts=[
+{name:'Arup Sinha',role:'Founder',initial:'A'},
+{name:'Raj Chorei',role:'CEO',initial:'R'},
+{name:'Nathan Ranglong',role:'Co-Founder',initial:'N'}
+];
+
+const founders=[
+{
+name:'Arup Sinha',
+role:'Founder',
+initial:'A',
+description:'The visionary behind LifeLens. Leading the vision to create a platform that helps people scan, discover and understand the world.'
+},
+{
+name:'Raj Chorei',
+role:'CEO',
+initial:'R',
+description:'Leading LifeLens operations and helping turn the vision into reality as Chief Executive Officer.'
+},
+{
+name:'Nathan Ranglong',
+role:'Co-Founder',
+initial:'N',
+description:'A Co-Founder of LifeLens, contributing to the shared vision and development of the platform.'
 }
-function openScan(category){
-document.getElementById('category').value=category;
-showPage('scan');
+];
+
+let selected=accounts[0];
+let voiceOn=true;
+let messages=[];
+let history=[];
+let cameraStream=null;
+
+const $=id=>document.getElementById(id);
+
+function renderAccounts(){
+$('accountList').innerHTML=accounts.map((a,i)=>`
+<div class="account ${selected.name===a.name?'selected':''}"
+onclick="selectAccount(${i})">
+<div class="account-icon">${a.initial}</div>
+<div class="account-info">
+<strong>${a.name}</strong>
+<small>${a.role}</small>
+</div>
+<span>${selected.name===a.name?'✓':'○'}</span>
+</div>
+`).join('');
 }
-document.getElementById('photo').addEventListener('change',function(e){
-const file=e.target.files[0];if(!file)return;
-const preview=document.getElementById('preview');
-preview.src=URL.createObjectURL(file);preview.style.display='block';
+
+function selectAccount(i){
+selected=accounts[i];
+renderAccounts();
+}
+
+function login(){
+const username=$('username').value.trim();
+const password=$('password').value.trim();
+
+if(!username||!password){
+showModal('Login required','Please enter your username and password.');
+return;
+}
+
+$('loginScreen').classList.add('hidden');
+$('mainApp').classList.remove('hidden');
+
+updateProfile();
+showPage('home');
+
+if(voiceOn){
+setTimeout(()=>speak('Welcome to LifeLens. How can I help you today?'),700);
+}
+}
+
+function updateProfile(){
+$('homeName').textContent=selected.name+' 👑';
+$('homeRole').textContent=selected.role;
+$('homeAvatar').textContent=selected.initial;
+$('profileAvatar').textContent=selected.initial;
+$('profileName').textContent=selected.name;
+$('profileRole').textContent=selected.role;
+}
+
+function logout(){
+stopCamera();
+if('speechSynthesis' in window)speechSynthesis.cancel();
+$('mainApp').classList.add('hidden');
+$('loginScreen').classList.remove('hidden');
+$('username').value='';
+$('password').value='';
+messages=[];
+history=[];
+$('chatMessages').innerHTML='';
+$('historyList').innerHTML='';
+}
+
+function showPage(page){
+document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
+const target=$(page+'Page');
+if(target)target.classList.remove('hidden');
+
+document.querySelectorAll('.nav button').forEach(b=>{
+b.classList.toggle('active',b.dataset.page===page);
 });
-function scanImage(){
-const file=document.getElementById('photo').files[0];
-if(!file){alert('Please choose an image first.');return;}
-document.getElementById('scanResult').style.display='block';
-currentResult="Image uploaded successfully. AI image recognition is not connected yet. Category: "+document.getElementById('category').value;
-document.getElementById('resultText').textContent=currentResult;
+
+if(page==='history')renderHistory();
+if(page==='founders')renderFounders();
 }
-function speakResult(){
-if(!document.getElementById('voiceToggle').checked||!currentResult)return;
-const speech=new SpeechSynthesisUtterance(currentResult);
-speech.rate=Number(document.getElementById('speed').value);
-speechSynthesis.cancel();speechSynthesis.speak(speech);
+
+function showModal(title,text){
+$('modalTitle').textContent=title;
+$('modalText').textContent=text;
+$('modal').classList.remove('hidden');
 }
-function stopSpeech(){speechSynthesis.cancel();}
-function saveResult(){
-if(!currentResult)return;
-saveItem("Discovery",currentResult);alert("Saved to your library!");
+
+function closeModal(){
+$('modal').classList.add('hidden');
 }
-function saveItem(title,content){
-let items=JSON.parse(localStorage.getItem('lifelens')||'[]');
-items.push({title,content});
-localStorage.setItem('lifelens',JSON.stringify(items));renderLibrary();
+
+function toggleVoice(){
+voiceOn=!voiceOn;
+$('voiceToggle').textContent=voiceOn?'ON':'OFF';
+if(!voiceOn&&'speechSynthesis' in window)speechSynthesis.cancel();
 }
-function saveNote(){
-const title=document.getElementById('noteTitle').value.trim();
-const content=document.getElementById('noteContent').value.trim();
-if(!title||!content){alert('Enter a title and note.');return;}
-saveItem(title,content);alert('Note saved!');
-document.getElementById('noteTitle').value='';
-document.getElementById('noteContent').value='';
+
+function speak(text){
+if(!voiceOn||!('speechSynthesis' in window))return;
+speechSynthesis.cancel();
+const utterance=new SpeechSynthesisUtterance(text);
+utterance.lang='en-IN';
+utterance.rate=.9;
+speechSynthesis.speak(utterance);
 }
-function renderLibrary(){
-const items=JSON.parse(localStorage.getItem('lifelens')||'[]');
-const saved=document.getElementById('savedItems');saved.innerHTML='';
-items.forEach(item=>{
-const div=document.createElement('div');div.className='item';
-const title=document.createElement('h3');title.textContent=item.title;
-const content=document.createElement('p');content.textContent=item.content;
-div.append(title,content);saved.appendChild(div);
-});
+
+function getAnswer(question){
+const q=question.toLowerCase().trim();
+
+if(q.includes('who is your master')||q.includes('who created you')||q.includes('who is the master')){
+return 'My master is Lord Arup Sinha. The Majesty himself! 👑';
 }
+
+if(q.includes('who is arup')){
+return 'Arup Sinha is the Founder of LifeLens. The visionary behind the LifeLens vision. 👑';
+}
+
+if(q.includes('who is raj')){
+return 'Raj Chorei is the CEO of LifeLens. 👑';
+}
+
+if(q.includes('who is nathan')||q.includes('who is ranglong')){
+return 'Nathan Ranglong is the Co-Founder of LifeLens. 👑';
+}
+
+if(q.includes('who are the founders')||q.includes('founders of lifelens')){
+return 'The LifeLens leadership team: Arup Sinha — Founder, Raj Chorei — CEO, and Nathan Ranglong — Co-Founder. Three leaders, one vision. 💜';
+}
+
+if(q.includes('hello')||q==='hi'||q.includes('hey')){
+return 'Hello! Welcome to LifeLens. How can I help you today? 💜';
+}
+
+if(q.includes('what is lifelens')){
+return 'LifeLens is an AI-powered exploration platform designed to help people scan, discover and understand the world around them.';
+}
+
+if(q.includes('what can you do')||q.includes('features')){
+return 'I can help you explore LifeLens features including AI Chat, Live Scan, Study Assistant, People Scanner, Food Scanner, Founders and Recent Activity.';
+}
+
+if(q.includes('ceo')){
+return 'Raj Chorei is the CEO of LifeLens.';
+}
+
+if(q.includes('founder')){
+return 'Arup Sinha is the Founder of LifeLens.';
+}
+
+if(q.includes('co-founder')){
+return 'Nathan Ranglong is the Co-Founder of LifeLens.';
+}
+
+return "I'm LifeLens AI. I can answer my programmed questions right now. For general intelligent answers, connect an AI API through a secure backend.";
+}
+
 function sendMessage(){
-const input=document.getElementById('question');
-const question=input.value.trim();if(!question)return;
-const chat=document.getElementById('chat');
-const user=document.createElement('div');user.className='message user';user.textContent=question;chat.appendChild(user);
-const reply=document.createElement('div');reply.className='message';
-reply.textContent='Your question has been received. A secure AI backend is required for real AI answers.';
-chat.appendChild(reply);input.value='';
+const input=$('chatInput');
+const clean=input.value.trim();
+if(!clean)return;
+
+const answer=getAnswer(clean);
+
+messages.push({type:'user',text:clean});
+messages.push({type:'ai',text:answer});
+
+history.unshift(clean);
+history=history.slice(0,20);
+
+input.value='';
+renderMessages();
+speak(answer);
 }
-function answer(correct){
-document.getElementById('quizResult').textContent=correct?'Correct! Well done!':'Not quite. The correct answer is Mars.';
+
+function renderMessages(){
+const box=$('chatMessages');
+box.innerHTML='';
+
+messages.forEach(msg=>{
+const div=document.createElement('div');
+div.className='message '+(msg.type==='user'?'user-msg':'ai-msg');
+
+const label=document.createElement('div');
+label.className='msg-label';
+label.textContent=msg.type==='user'?'YOU':'LIFELENS';
+
+const text=document.createElement('div');
+text.className='msg-text';
+text.textContent=msg.text;
+
+div.append(label,text);
+
+if(msg.type==='ai'){
+const listen=document.createElement('button');
+listen.textContent='🔊 Listen';
+listen.className='secondary';
+listen.style.marginTop='10px';
+listen.onclick=()=>speak(msg.text);
+div.appendChild(listen);
 }
-renderLibrary();
-</script>
-</body>
- </html>
- 
+
+box.appendChild(div);
+});
+
+box.scrollTop=box.scrollHeight;
+}
+
+function renderHistory(){
+const list=$('historyList');
+if(!history.length){
+list.innerHTML='<p class="muted">No activity yet. Start exploring LifeLens!</p>';
+return;
+}
+
+list.innerHTML='';
+history.forEach(item=>{
+const btn=document.createElement('button');
+btn.className='history-item';
+btn.textContent='💬 '+item;
+btn.onclick=()=>{
+showPage('chat');
+$('chatInput').value=item;
+};
+list.appendChild(btn);
+});
+}
+
+function renderFounders(){
+$('
